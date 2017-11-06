@@ -3,6 +3,7 @@ import { reactReduxFirebase } from 'react-redux-firebase';
 import firebase from 'firebase';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
+import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 export const history = createHistory();
@@ -21,7 +22,7 @@ const config = {
 export const fb = firebase.initializeApp(config);
 
 const createStoreWithMiddleware = compose(
-  applyMiddleware(routerMiddleware(history)),
+  applyMiddleware(thunk, routerMiddleware(history)),
   reactReduxFirebase(fb, {}),
   typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
 )(createStore);
