@@ -8,8 +8,8 @@ import {
   TableRow,
   TableColumn,
   Divider,
-  Button,
 } from 'react-md';
+import AlbumDownloadButton from '../containers/AlbumDownloadButton';
 
 export default ({ album }) => (
   <Paper className="md-cell md-cell--12 md-grid">
@@ -30,14 +30,7 @@ export default ({ album }) => (
       <p className="album-header md-display-1 md-text-center">{album.releaseDate.substring(0, 4)}</p>
       <Divider style={{ marginBottom: 20, marginTop: 20 }} />
       <div className="md-text-center">
-        <Button
-          raised
-          secondary
-          style={{ width: '100%' }}
-          className="md-text-center"
-        >
-        Download
-        </Button>
+        <AlbumDownloadButton album={album} />
       </div>
     </section>
     <section className="md-cell md-cell--5-tablet md-cell--8-desktop">

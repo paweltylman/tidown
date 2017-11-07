@@ -7,6 +7,12 @@ const navItems = [{
   key: 'artist',
   primaryText: 'Artist',
   leftIcon: <FontIcon>person</FontIcon>,
+  path: '/artist',
+}, {
+  key: 'album',
+  primaryText: 'Album',
+  leftIcon: <FontIcon>album</FontIcon>,
+  path: 'album',
 }];
 
 class Navdrawer extends Component {
@@ -16,7 +22,7 @@ class Navdrawer extends Component {
     // Update the items so they have an onClick handler to change the current page
     this.navItems = navItems.map(item => ({
       ...item,
-      onClick: () => { this.props.dispatch(push('/artist')); },
+      onClick: () => { this.props.dispatch(push(item.path)); },
     }));
   }
 

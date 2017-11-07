@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Autocomplete, Avatar, FontIcon } from 'react-md';
 import throttle from 'lodash.throttle';
-import fetchArtists from '../actions/fetch_artists';
-import fetchArtistInfo from '../actions/fetch_artist_info';
+import fetchArtists from '../actions/fetchArtists';
+import fetchArtistInfo from '../actions/fetchArtistInfo';
 
 class ArtistSearch extends Component {
 
@@ -23,7 +23,7 @@ class ArtistSearch extends Component {
   render() {
 
     const data = this.props.artists.data.map(artist => ({
-      ...artist,
+      id: artist.id,
       primaryText: artist.name,
       key: artist.id,
       leftAvatar: artist.picture ? (
