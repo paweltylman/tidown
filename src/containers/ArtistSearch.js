@@ -25,6 +25,7 @@ class ArtistSearch extends Component {
     const data = this.props.artists.data.map(artist => ({
       ...artist,
       primaryText: artist.name,
+      key: artist.id,
       leftAvatar: artist.picture ? (
         <Avatar src={artist.picture.sm} role="presentation" />
       ) : (
@@ -41,6 +42,9 @@ class ArtistSearch extends Component {
         filter={null}
         onChange={this.handleChange}
         onAutocomplete={this.handleAutocomplete}
+        clearOnAutocomplete
+        inputStyle={{ fontSize: 20 }}
+        listStyle={{ fontSize: 20 }}
       />
     );
   }

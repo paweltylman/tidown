@@ -26,9 +26,9 @@ const fetchArtistInfo = id => async (dispatch) => {
     await Promise.map(artist.albums, async (album) => {
       const tracks = await tidal.getAlbumTracks(album.id);
       album.tracks = tracks;
+      album.cover = tidal.albumArtToUrl(album.cover);
       return album;
     });
-    console.log(artist);
     dispatch(receiveArtistInfo(artist));
   } catch (e) {
     dispatch(errorArtistInfo(e));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Navdrawer from '../containers/Navdrawer';
-import ArtistSearch from '../containers/ArtistSearch';
+import Artist from './artist';
 
 export default () => (
   <div>
@@ -9,7 +9,7 @@ export default () => (
       <Route
         exact
         path="/artist"
-        component={ArtistSearch}
+        component={Artist}
       />
     </Navdrawer>
   </div>
