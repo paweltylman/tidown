@@ -14,7 +14,7 @@ class ArtistAlbums extends Component {
     );
 
     const error = (
-      <h4>An error occured. Try searching and selecting an artist again.</h4>
+      <h4 className="md-text-center">An error occured. Try searching and selecting an artist again.</h4>
     );
 
     if (this.props.selectedArtist.loading) {

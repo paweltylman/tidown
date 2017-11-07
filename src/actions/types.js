@@ -7,3 +7,6 @@ export const ERR_ARTIST_INFO = 'ERR_ARTIST_INFO';
 export const REQ_ALBUMS = 'REQ_ALBUMS';
 export const REC_ALBUMS = 'REC_ALBUMS';
 export const ERR_ALBUMS = 'ERR_ALBUMS';
+export const REQ_ALBUM_INFO = 'REQ_ALBUM_INFO';
+export const REC_ALBUM_INFO = 'REC_ALBUM_INFO';
+export const ERR_ALBUM_INFO = 'ERR_ALBUM_INFO';

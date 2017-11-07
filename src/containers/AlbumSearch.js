@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Autocomplete, Avatar } from 'react-md';
 import throttle from 'lodash.throttle';
 import fetchAlbums from '../actions/fetchAlbums';
+import fetchAlbumInfo from '../actions/fetchAlbumInfo';
 
 class AlbumSearch extends Component {
 
@@ -16,7 +17,7 @@ class AlbumSearch extends Component {
 
   handleAutocomplete = (value, index, matches) => {
     const { id } = matches[index];
-    console.log(matches[index]);
+    this.props.fetchAlbumInfo(id);
   }
 
   render() {
@@ -51,6 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchAlbums,
+  fetchAlbumInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumSearch);
