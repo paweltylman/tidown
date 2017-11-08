@@ -12,21 +12,27 @@ class AlbumDownloadButton extends Component {
 
   render() {
 
-    const { album, queuedAlbums } = this.props;
+    const { album, queuedAlbums, downloaded } = this.props;
 
     // wait for firebase queue to be loaded
-    if (!isLoaded(queuedAlbums)) {
+    if (!isLoaded(queuedAlbums) || !isLoaded(downloaded)) {
       return null;
     }
 
     // if the queue is empty than everything should have a download button (for now)
-    if (isEmpty(queuedAlbums)) {
+    if (isEmpty(queuedAlbums) && isEmpty(downloaded)) {
       return (
         <DownloadButton text="Download" onClick={() => { this.downloadAlbum(album); }} />
       );
     }
 
-    if (queuedAlbums[album.id]) {
+    if (downloaded[album.id]) {
+      return (
+        <DownloadButton text="Available" disabled />
+      );
+    }
+
+    if (queuedAlbums && queuedAlbums[album.id]) {
       const queuedAlbum = queuedAlbums[album.id];
       if (queuedAlbum._state && queuedAlbum._state === 'in_progress') {
         return (
@@ -50,10 +56,15 @@ const fbAlbumDownloadButton = firebaseConnect([
     path: 'albums/queue/tasks',
     storeAs: 'queuedAlbums',
   },
+  {
+    path: 'albums/downloads/',
+    storeAs: 'downloaded',
+  },
 ])(AlbumDownloadButton);
 
 const mapStateToProps = (state => ({
   queuedAlbums: state.firebase.data.queuedAlbums,
+  downloaded: state.firebase.data.downloaded,
 }));
 
 export default connect(mapStateToProps, null)(fbAlbumDownloadButton);
