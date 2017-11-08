@@ -1,5 +1,6 @@
 import Tidal from 'tidal-api-wrapper';
 import * as types from './types';
+import filterAlbums from '../helpers/filterAlbums';
 
 const tidal = new Tidal();
 
@@ -20,11 +21,11 @@ const receiveAlbums = albums => ({
 const fetchAlbums = query => async (dispatch) => {
   dispatch(requestAlbums());
   try {
-    const albums = await tidal.search(query, 'albums', 10);
+    const albums = await tidal.search(query, 'albums', 20);
     albums.forEach((album) => {
       album.cover = tidal.albumArtToUrl(album.cover);
     });
-    dispatch(receiveAlbums(albums));
+    dispatch(receiveAlbums(filterAlbums(albums)));
   } catch (e) {
     dispatch(errorAlbums(e));
   }

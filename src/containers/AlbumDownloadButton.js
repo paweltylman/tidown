@@ -26,7 +26,7 @@ class AlbumDownloadButton extends Component {
       );
     }
 
-    if (downloaded[album.id]) {
+    if (downloaded && downloaded[album.id]) {
       return (
         <DownloadButton text="Available" disabled />
       );

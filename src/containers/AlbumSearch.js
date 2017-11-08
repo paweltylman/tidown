@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Autocomplete, Avatar } from 'react-md';
-import throttle from 'lodash.throttle';
+import { throttle } from 'lodash';
 import fetchAlbums from '../actions/fetchAlbums';
 import fetchAlbumInfo from '../actions/fetchAlbumInfo';
 
