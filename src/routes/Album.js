@@ -1,6 +1,6 @@
 import React from 'react';
 import AlbumSearch from '../containers/AlbumSearch';
-import Album from '../containers/Album';
+import Albums from '../containers/Albums';
 
 export default () => (
   <div>
@@ -10,7 +10,7 @@ export default () => (
       </div>
     </div>
     <div className="md-grid">
-      <Album />
+      <Albums />
     </div>
   </div>
 );

@@ -1,19 +1,17 @@
 import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase';
 import { routerReducer } from 'react-router-redux';
-import artists from './artists';
-import selectedArtist from './selectedArtist';
+import artistAutocomplete from './artistAutocomplete';
+import albumAutocomplete from './albumAutocomplete';
 import albums from './albums';
-import selectedAlbum from './selectedAlbum';
 
 // Add firebase to reducers
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   router: routerReducer,
-  artists,
-  selectedArtist,
+  artistAutocomplete,
+  albumAutocomplete,
   albums,
-  selectedAlbum,
 });
 
 export default rootReducer;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Autocomplete, Avatar, FontIcon } from 'react-md';
-import throttle from 'lodash.throttle';
-import fetchArtists from '../actions/fetchArtists';
-import fetchArtistInfo from '../actions/fetchArtistInfo';
+import { throttle } from 'lodash';
+import fetchArtistAutocomplete from '../actions/fetchArtistAutocomplete';
+import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 
 class ArtistSearch extends Component {
 
@@ -12,17 +12,17 @@ class ArtistSearch extends Component {
   }
 
   search = throttle((query) => {
-    this.props.fetchArtists(query);
+    this.props.fetchArtistAutocomplete(query);
   }, 500)
 
   handleAutocomplete = (value, index, matches) => {
     const { id } = matches[index];
-    this.props.fetchArtistInfo(id);
+    this.props.fetchArtistAlbums(id);
   };
 
   render() {
 
-    const data = this.props.artists.data.map(artist => ({
+    const data = this.props.artistAutocomplete.data.map(artist => ({
       id: artist.id,
       primaryText: artist.name,
       key: artist.id,
@@ -52,12 +52,12 @@ class ArtistSearch extends Component {
 }
 
 const mapStateToProps = state => ({
-  artists: state.artists,
+  artistAutocomplete: state.artistAutocomplete,
 });
 
 const mapDispatchToProps = {
-  fetchArtists,
-  fetchArtistInfo,
+  fetchArtistAutocomplete,
+  fetchArtistAlbums,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistSearch);

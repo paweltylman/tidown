@@ -21,18 +21,14 @@ $md-secondary-color: $md-deep-orange-a-200;
   line-height: 20px;
 }
 
-ol {
-  padding-left:0;
-}
-
-li {
-  list-style-type: none;
-}
-
 .md-tile-text--primary {
   font-size: 20px;
 }
 
 .md-floating-label {
   font-size: 15px;
+}
+
+.download {
+  margin: 10px;
 }

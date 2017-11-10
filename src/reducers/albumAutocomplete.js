@@ -1,29 +1,30 @@
 import * as types from '../actions/types';
 
 const initialState = {
-  data: {},
+  data: [],
   loading: false,
   error: false,
 };
 
-const selectedAlbum = (state = initialState, action) => {
+const albums = (state = initialState, action) => {
   switch (action.type) {
-    case types.REQ_ALBUM_INFO:
+    case types.REQ_ARTISTS:
       return {
         ...state,
         loading: true,
         error: false,
       };
-    case types.REC_ALBUM_INFO:
+    case types.REC_ALBUMS:
       return {
         ...state,
         data: action.payload,
         loading: false,
         error: false,
       };
-    case types.ERR_ALBUM_INFO:
+    case types.ERR_ALBUMS:
       return {
         ...state,
+        data: [],
         loading: false,
         error: action.payload,
       };
@@ -32,4 +33,4 @@ const selectedAlbum = (state = initialState, action) => {
   }
 };
 
-export default selectedAlbum;
+export default albums;

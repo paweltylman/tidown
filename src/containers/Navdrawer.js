@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavigationDrawer, FontIcon } from 'react-md';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import clearAlbums from '../actions/clearAlbums';
 
 const navItems = [{
   key: 'artist',
@@ -22,7 +23,10 @@ class Navdrawer extends Component {
     // Update the items so they have an onClick handler to change the current page
     this.navItems = navItems.map(item => ({
       ...item,
-      onClick: () => { this.props.dispatch(push(item.path)); },
+      onClick: () => {
+        this.props.clearAlbums();
+        this.props.push(item.path);
+      },
     }));
   }
 
@@ -45,4 +49,9 @@ class Navdrawer extends Component {
   }
 }
 
-export default connect(null, null)(Navdrawer);
+const mapDispatchToProps = {
+  push,
+  clearAlbums,
+};
+
+export default connect(null, mapDispatchToProps)(Navdrawer);
