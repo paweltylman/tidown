@@ -23,6 +23,8 @@ const fetchArtistInfo = id => async (dispatch) => {
   dispatch(requestArtistAlbums());
   try {
     let albums = await tidal.getArtistAlbums(id);
+    const eps = await tidal.getArtistEPsAndSingles(id);
+    albums = albums.concat(eps.filter(album => album.type !== 'SINGLE'));
     albums = filterAlbums(albums);
     await Promise.map(albums, async (album) => {
       const tracks = await tidal.getAlbumTracks(album.id);

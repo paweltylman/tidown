@@ -4,8 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/start",
-    "client": "cd client && yarn start",
+    "start": "cd client && npm run build && cd ../ && node ./bin/start",
+    "client": "cd client && npm start",
     "server": "nodemon ./bin/start",
     "dev": "npm-run-all -p client server",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
