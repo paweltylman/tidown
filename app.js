@@ -23,6 +23,7 @@ export const fb = firebase.database();
 
 export const tidown = new Tidown({
   sessionId: process.env.SESSIONID,
+  downloadPath: process.env.DOWNLOAD_PATH,
 });
 
 const app = express();
