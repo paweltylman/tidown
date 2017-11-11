@@ -4,17 +4,32 @@ import api from '../helpers/api';
 
 export default class PlexButton extends Component {
 
+  state = {
+    downloading: false,
+    error: false,
+  }
+
   addToPlex = async () => {
 
-    const res = await api({
-      method: 'POST',
-      url: '/plex/album',
-      data: {
-        album: this.props.album,
-      },
-    });
+    this.setState({ downloading: true });
 
-    return res.data.album;
+    try {
+      const res = await api({
+        method: 'POST',
+        url: '/plex/album',
+        data: {
+          album: this.props.album,
+        },
+      });
+
+      return res.data.album;
+    } catch (e) {
+
+      return this.setState({
+        error: true,
+        downloading: false,
+      });
+    }
   }
 
   render() {
@@ -23,8 +38,10 @@ export default class PlexButton extends Component {
 
     if (available) {
       return (<Button disabled text="Available On Plex" />);
-    } else if (queued) {
+    } else if (queued || this.state.downloading) {
       return (<Button disabled text="Adding To Plex" />);
+    } else if (this.state.error) {
+      return (<Button disabled text="Error" />);
     }
 
     return (
