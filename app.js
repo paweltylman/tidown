@@ -9,6 +9,7 @@ import cors from 'cors';
 import zip from 'express-easy-zip';
 import fbConfig from './fbConfig';
 import Tidown from './helpers/tidown';
+import scanner from './helpers/scanner';
 
 import plex from './routes/plex';
 import download from './routes/download';
@@ -73,5 +74,8 @@ process.on('uncaughtException', (err) => {
   debug('Caught exception: %j', err);
   process.exit(1);
 });
+
+// start the plex scanner
+scanner();
 
 export default app;
