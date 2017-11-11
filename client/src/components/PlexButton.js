@@ -24,7 +24,7 @@ export default class PlexButton extends Component {
     if (available) {
       return (<Button disabled text="Available On Plex" />);
     } else if (queued) {
-      return (<Button disabled text="Downloading" />);
+      return (<Button disabled text="Adding To Plex" />);
     }
 
     return (

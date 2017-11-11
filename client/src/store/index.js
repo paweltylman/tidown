@@ -9,12 +9,12 @@ import rootReducer from '../reducers';
 export const history = createHistory();
 
 const config = {
-  apiKey: 'AIzaSyCuh8HinNEmkfMJAAf_zaG7vtK3Ymi088w',
-  authDomain: 'tidal-down.firebaseapp.com',
-  databaseURL: 'https://tidal-down.firebaseio.com',
-  projectId: 'tidal-down',
-  storageBucket: 'tidal-down.appspot.com',
-  messagingSenderId: '442592023637',
+  apiKey: 'AIzaSyAgiAm38GOo-1auEAeuvOZOo60ncRy1FXU',
+  authDomain: 'tidown-c24a9.firebaseapp.com',
+  databaseURL: 'https://tidown-c24a9.firebaseio.com',
+  projectId: 'tidown-c24a9',
+  storageBucket: 'tidown-c24a9.appspot.com',
+  messagingSenderId: '30129502185',
 };
 
 // export this so we can access it to use transaction method
