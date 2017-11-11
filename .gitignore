@@ -26,4 +26,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # build artifacts
-src/**/*.css
+client/src/**/*.css
