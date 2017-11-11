@@ -5,7 +5,7 @@ const scanner = () => {
   fb.ref('/albums/queue').on('child_removed', (snapshot) => {
     fb.ref('/albums/queue').once('value', (snap) => {
       const albums = snap.val();
-      if (albums === null) {
+      if (albums === null && process.env.POST_PROCESS) {
         execSync(process.env.POST_PROCESS);
       }
     });
