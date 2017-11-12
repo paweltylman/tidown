@@ -4,11 +4,14 @@ import { tidown, fb } from '../app';
 
 const router = express.Router();
 
-router.post('/album/available', async (req, res) => {
+router.get('/album/available', async (req, res) => {
 
-  const { album } = req.body;
+  const { id } = req.query;
 
   try {
+
+    const snapshot = await fb.ref(`/albums/available/${id}`).once('value');
+    const album = snapshot.val();
 
     await res.zip({
       files: [
@@ -22,22 +25,44 @@ router.post('/album/available', async (req, res) => {
 
   } catch (e) {
 
-    await fb.ref('/albums/error').child(album.id).set(album);
+    res.status(400).send({
+      message: 'An error occurred.',
+    });
+
+  }
+});
+
+router.post('/album/temporary', async (req, res) => {
+
+  const { id } = req.body;
+
+  try {
+
+    const album = await tidown.downloadAlbum(id);
+
+    await fb.ref('/albums/temporary').child(id).set(album);
+
+    res.status(200).send({
+      album,
+    });
+
+  } catch (e) {
 
     res.status(400).send({
       message: 'An error occurred.',
     });
-  }
 
+  }
 });
 
-router.post('/album/unavailable', async (req, res) => {
+router.get('/album/temporary', async (req, res) => {
+
+  const { id } = req.query;
 
   try {
 
-    const { id } = req.body.album;
-
-    const album = await tidown.downloadAlbum(id);
+    const snapshot = await fb.ref(`/albums/temporary/${id}`).once('value');
+    const album = snapshot.val();
 
     await res.zip({
       files: [
@@ -48,6 +73,8 @@ router.post('/album/unavailable', async (req, res) => {
       ],
       filename: `${album.artist.name} - ${album.title}.zip`,
     });
+
+    await fb.ref('/albums/temporary').child(album.id).remove();
 
     fs.removeSync(album.path);
 
@@ -56,6 +83,7 @@ router.post('/album/unavailable', async (req, res) => {
     res.status(400).send({
       message: 'An error occurred.',
     });
+
   }
 
 });

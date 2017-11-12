@@ -18,7 +18,9 @@ class ArtistAlbums extends Component {
     );
 
     const error = (
-      <h4 className="md-text-center">An error occured. Try searching and selecting an artist again.</h4>
+      <h4 className="md-text-container">
+        An error occured. Try searching and selecting an artist again.
+      </h4>
     );
 
     if (albums.loading) {
@@ -26,17 +28,21 @@ class ArtistAlbums extends Component {
     } else if (albums.error) {
       return error;
     } else if (albums.data) {
-      return albums.data.map(album =>
-        (
+      return albums.data.map((album) => {
+
+        const isAvailable = available !== null && available.hasOwnProperty(album.id);
+        const isQueued = queue !== null && queue.hasOwnProperty(album.id);
+
+        return (
           <Album
-            album={album}
+            album={isAvailable ? available[album.id] : album}
             key={album.id}
-            available={
-              available !== null && available.hasOwnProperty(album.id) ? available[album.id] : false
-            }
-            queued={queue !== null && queue.hasOwnProperty(album.id)}
+            available={isAvailable}
+            queued={isQueued}
           />
-        ));
+        );
+      });
+
     }
 
     return null;

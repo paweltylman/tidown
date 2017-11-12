@@ -46,7 +46,7 @@ app.use(zip());
 app.use('/plex', plex);
 app.use('/download', download);
 
-app.use(express.static('./client/build'));
+app.use(express.static(path.join(__dirname, './client/build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));

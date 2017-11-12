@@ -1548,6 +1548,12 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
+express-async-router@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/express-async-router/-/express-async-router-0.1.12.tgz#b604b29373a8b95e019f63e4b0136f550c8e47d5"
+  dependencies:
+    express "^4.0.0"
+
 express-easy-zip@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/express-easy-zip/-/express-easy-zip-1.1.4.tgz#393ff8b6bf7a9c4c6a18936d2ea88490e887369e"
@@ -1558,7 +1564,7 @@ express-easy-zip@^1.1.4:
     var-clean "^1.0.0"
     zip-stream "^1.0.0"
 
-express@^4.15.4:
+express@^4.0.0, express@^4.15.4:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
