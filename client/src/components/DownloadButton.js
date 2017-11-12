@@ -26,7 +26,7 @@ export default class DownloadButton extends Component {
 
         const res = await api({
           method: 'POST',
-          url: '/dowload/album/temporary',
+          url: '/download/album/temporary',
           data: {
             id: this.props.album.id,
           },
