@@ -13,7 +13,7 @@ const navItems = [{
   key: 'album',
   primaryText: 'Album',
   leftIcon: <FontIcon>album</FontIcon>,
-  path: 'album',
+  path: '/album',
 }];
 
 class Navdrawer extends Component {
@@ -24,7 +24,9 @@ class Navdrawer extends Component {
     this.navItems = navItems.map(item => ({
       ...item,
       onClick: () => {
-        this.props.clearAlbums();
+        if (item.path !== this.props.path) {
+          this.props.clearAlbums();
+        }
         this.props.push(item.path);
       },
     }));
@@ -49,9 +51,13 @@ class Navdrawer extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  path: state.router.location.pathname,
+});
+
 const mapDispatchToProps = {
   push,
   clearAlbums,
 };
 
-export default connect(null, mapDispatchToProps)(Navdrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(Navdrawer);
