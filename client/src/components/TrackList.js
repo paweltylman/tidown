@@ -5,6 +5,7 @@ import {
   TableBody,
   TableRow,
   TableColumn,
+  FontIcon,
 } from 'react-md';
 
 export default ({ tracks }) => (
@@ -13,6 +14,7 @@ export default ({ tracks }) => (
       <TableRow>
         <TableColumn>Number</TableColumn>
         <TableColumn>Title</TableColumn>
+        <TableColumn>Download</TableColumn>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -22,7 +24,14 @@ export default ({ tracks }) => (
             <TableColumn>
               {track.trackNumber < 10 ? `0${track.trackNumber}.` : `${track.trackNumber}.`}
             </TableColumn>
-            <TableColumn>{track.title}</TableColumn>
+            <TableColumn className="md-table-column--collapse">
+              {track.title}
+            </TableColumn>
+            <TableColumn>
+              <FontIcon
+                iconClassName="fa fa-download mini-icon"
+              />
+            </TableColumn>
           </TableRow>
         ))
       }

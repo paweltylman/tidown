@@ -9,7 +9,11 @@ import fetchNewAlbums from '../actions/fetchNewAlbums';
 class NewReleases extends Component {
 
   componentWillMount() {
-    this.props.fetchNewAlbums();
+    const { newAlbums } = this.props;
+    // only fetch new albums once since these are only updated once a week
+    if (!newAlbums.data.newAlbums.length > 0) {
+      this.props.fetchNewAlbums();
+    }
   }
 
   render() {

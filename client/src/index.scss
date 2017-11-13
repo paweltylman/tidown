@@ -60,3 +60,32 @@ $md-secondary-color: $md-deep-orange-a-200;
 .md-select-field--btn.md-select-field--btn {
   padding-left: 5px;
 }
+
+.mini-icon {
+  font-size: 16px;
+  color: #ff6e40;
+  margin-left: 10px;
+}
+
+.md-table-column {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.md-table-column:first-child {
+  padding-right: 10px;
+  max-width: 10%;
+}
+
+.md-table-column:nth-child(2) {
+  padding-right: 10px;
+  max-width: 80%;
+}
+
+.md-table-column:nth-child(3) {
+  max-width: 10%;
+}
+
+.md-table-column--collapse {
+  max-width: 0;
+}
