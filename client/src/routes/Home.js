@@ -5,8 +5,8 @@ export default () => (
 
   <div>
 
-    <div className="md-cell md-text-container title">
-      <h1>Welcome to Tidown</h1>
+    <div className="md-cell--12 md-text-container title">
+      <h1 className="md-text-center">Welcome to Tidown</h1>
     </div>
 
     <Divider className="divider-large" />
