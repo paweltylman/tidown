@@ -14,7 +14,9 @@ class NewReleases extends Component {
 
   render() {
 
-    const { newAlbums, available, queue } = this.props;
+    const {
+      newAlbums, available, queue, view,
+    } = this.props;
 
     if (!isLoaded(available) || !isLoaded(queue)) {
       return null;
@@ -26,7 +28,7 @@ class NewReleases extends Component {
 
     if (newAlbums.error) { return (<GenericError />); }
 
-    const albums = newAlbums.data.newAlbums;
+    const albums = newAlbums.data[view.value];
 
     return albums.map((album) => {
 
