@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { CircularProgress } from 'react-md';
-import Album from '../components/Album';
 import SimpleAlbum from '../components/SimpleAlbum';
 import fetchNewAlbums from '../actions/fetchNewAlbums';
 
-class ArtistAlbums extends Component {
+class NewReleases extends Component {
+
+  componentWillMount() {
+    if (this.props.newAlbums.data.length === 0) {
+      this.props.fetchNewAlbums();
+    }
+  }
 
   render() {
 
-    const { albums, available, queue } = this.props;
+    const { newAlbums, available, queue } = this.props;
 
     const loading = (
       <CircularProgress
@@ -25,7 +30,7 @@ class ArtistAlbums extends Component {
       </h4>
     );
 
-    if (albums.loading) {
+    if (newAlbums.loading) {
       return loading;
     }
 
@@ -33,59 +38,40 @@ class ArtistAlbums extends Component {
       return null;
     }
 
-    if (albums.error) { return error; }
+    if (newAlbums.error) { return error; }
 
-    if (albums.data.length > 0) {
+    const albums = newAlbums.data.newAlbums;
 
+    if (albums) {
       return (
-        <div>
+        <div className="md-grid">
           {
-            albums.newAlbums ? (
-              <h1 style={{ marginTop: 40, marginLeft: 12 }}>New Releases:</h1>
-            ) : null
-          }
-          <div className="md-grid">
-            {
-            albums.data.map((album) => {
+            albums.map((album) => {
 
               const isAvailable = !isEmpty(available) && available.hasOwnProperty(album.id);
               const isQueued = !isEmpty(queue) && queue.hasOwnProperty(album.id);
 
-              if (albums.newAlbums) {
-                return (
-                  <SimpleAlbum
-                    album={isAvailable ? available[album.id] : album}
-                    key={album.id}
-                    available={isAvailable}
-                    queued={isQueued}
-                  />
-                );
-              }
-
               return (
-                <Album
+                <SimpleAlbum
                   album={isAvailable ? available[album.id] : album}
                   key={album.id}
                   available={isAvailable}
                   queued={isQueued}
+                  className="md-cell"
                 />
               );
 
             })
           }
-          </div>
         </div>
       );
-
     }
 
     return null;
-
   }
-
 }
 
-const fbArtistAlbums = firebaseConnect([
+const fbNewReleases = firebaseConnect([
   {
     path: '/albums/queue',
     storeAs: 'queue',
@@ -94,10 +80,10 @@ const fbArtistAlbums = firebaseConnect([
     path: '/albums/available',
     storeAs: 'available',
   },
-])(ArtistAlbums);
+])(NewReleases);
 
 const mapStateToProps = state => ({
-  albums: state.albums,
+  newAlbums: state.newAlbums,
   available: state.firebase.data.available,
   queue: state.firebase.data.queue,
 });
@@ -106,4 +92,4 @@ const mapDispatchToProps = {
   fetchNewAlbums,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(fbArtistAlbums);
+export default connect(mapStateToProps, mapDispatchToProps)(fbNewReleases);

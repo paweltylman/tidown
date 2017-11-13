@@ -1,5 +1,6 @@
 import Tidal from 'tidal-api-wrapper';
 import axios from 'axios';
+import _ from 'lodash';
 import * as types from './types';
 
 const tidal = new Tidal();
@@ -35,13 +36,25 @@ const fetchNewAlbums = () => async (dispatch) => {
       },
     });
 
-    const newAlbums = res.data.rows[0].modules[0].tabs[0].pagedList.items;
+    const tabs = res.data.rows[0].modules[0].tabs;
 
-    newAlbums.forEach((album) => {
-      album.cover = tidal.albumArtToUrl(album.cover);
+    const newAlbums = _.find(tabs, tab => tab.title === 'New').pagedList.items;
+    const staffPicks = _.find(tabs, tab => tab.title === 'Staff Picks').pagedList.items;
+    const topAlbums = _.find(tabs, tab => tab.title === 'Top 20').pagedList.items;
+
+    const albums = {
+      newAlbums,
+      staffPicks,
+      topAlbums,
+    };
+
+    Object.keys(albums).forEach((property) => {
+      albums[property].forEach((album) => {
+        album.cover = tidal.albumArtToUrl(album.cover);
+      });
     });
 
-    dispatch(receiveNewAlbums(newAlbums));
+    dispatch(receiveNewAlbums(albums));
 
   } catch (e) {
 

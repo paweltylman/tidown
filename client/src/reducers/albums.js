@@ -49,25 +49,6 @@ const albums = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    case types.REQ_NEW_ALBUMS:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.REC_NEW_ALBUMS:
-      return {
-        ...state,
-        newAlbums: true,
-        data: action.payload,
-        loading: false,
-        error: false,
-      };
-    case types.ERR_NEW_ALBUMS:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
     case types.CLEAR_ALBUMS:
       return initialState;
     default:

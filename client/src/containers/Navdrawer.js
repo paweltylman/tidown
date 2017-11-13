@@ -6,14 +6,19 @@ import clearAlbums from '../actions/clearAlbums';
 
 const navItems = [{
   key: 'artist',
-  primaryText: 'Artist',
+  primaryText: 'Artists',
   leftIcon: <FontIcon>person</FontIcon>,
-  path: '/artist',
+  path: '/artists',
 }, {
   key: 'album',
-  primaryText: 'Album',
+  primaryText: 'Albums',
   leftIcon: <FontIcon>album</FontIcon>,
-  path: '/album',
+  path: '/albums',
+}, {
+  key: 'releases',
+  primaryText: 'New Releases',
+  leftIcon: <FontIcon>library_music</FontIcon>,
+  path: '/releases',
 }];
 
 class Navdrawer extends Component {

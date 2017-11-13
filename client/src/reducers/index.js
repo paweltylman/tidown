@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import artistAutocomplete from './artistAutocomplete';
 import albumAutocomplete from './albumAutocomplete';
 import albums from './albums';
+import newAlbums from './newAlbums';
 
 // Add firebase to reducers
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   artistAutocomplete,
   albumAutocomplete,
   albums,
+  newAlbums,
 });
 
 export default rootReducer;

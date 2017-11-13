@@ -1,32 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Divider } from 'react-md';
+import React from 'react';
 import AlbumSearch from '../containers/AlbumSearch';
-import Albums from '../containers/Albums';
-import fetchNewAlbums from '../actions/fetchNewAlbums';
+import AlbumResults from '../containers/AlbumResults';
 
-class AlbumRoute extends Component {
-
-  componentDidMount() {
-    this.props.fetchNewAlbums();
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="md-grid">
-          <div className="md-cell md-cell--8-desktop centered">
-            <AlbumSearch />
-          </div>
-        </div>
-        <Albums />
+export default () => (
+  <div>
+    <div className="md-grid">
+      <div className="md-cell md-cell--8-desktop centered">
+        <AlbumSearch />
       </div>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  fetchNewAlbums,
-};
-
-export default connect(null, mapDispatchToProps)(AlbumRoute);
+    </div>
+    <AlbumResults />
+  </div>
+);
