@@ -2,5 +2,7 @@ import React from 'react';
 import NewReleases from '../containers/NewReleases';
 
 export default () => (
-  <NewReleases />
+  <div className="md-grid">
+    <NewReleases />
+  </div>
 );

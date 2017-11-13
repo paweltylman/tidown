@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { saveAs } from 'file-saver';
-import qs from 'querystring';
 import Button from './RaisedButton';
 import api from '../helpers/api';
 

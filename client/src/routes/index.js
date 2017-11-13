@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
+import { Route } from 'react-router';
 import Navdrawer from '../containers/Navdrawer';
 import Home from './Home';
 import Artist from './Artist';

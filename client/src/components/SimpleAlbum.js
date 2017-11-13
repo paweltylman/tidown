@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import {
   Card,
   CardTitle,
-  CardText,
   Media,
   MediaOverlay,
   Button,
-  FontIcon,
-  CircularProgress,
 } from 'react-md';
 import api from '../helpers/api';
 
@@ -18,7 +15,8 @@ export default class SimpleAlbum extends Component {
   state = {
     downloading: false,
     processing: false,
-    error: false,
+    plexError: false,
+    downloadError: false,
   }
 
   addToPlex = async () => {
@@ -26,7 +24,8 @@ export default class SimpleAlbum extends Component {
     this.setState({ downloading: true });
 
     try {
-      const res = await api({
+
+      await api({
         method: 'POST',
         url: '/plex/album',
         data: {
@@ -37,7 +36,7 @@ export default class SimpleAlbum extends Component {
     } catch (e) {
 
       this.setState({
-        error: true,
+        plexError: true,
         downloading: false,
       });
     }
@@ -78,7 +77,7 @@ export default class SimpleAlbum extends Component {
 
     } catch (e) {
 
-      this.setState({ processing: false, error: true });
+      this.setState({ processing: false, downloadError: true });
 
     }
 
@@ -99,6 +98,7 @@ export default class SimpleAlbum extends Component {
                 tooltipLabel={
                   available ? 'Available On Plex' :
                     this.state.downloading ? 'Adding To Plex' :
+                      this.state.plexError ? 'Error' :
                       'Add To Plex'
                 }
                 tooltipPosition="top"
@@ -108,6 +108,8 @@ export default class SimpleAlbum extends Component {
                     'fa fa-check'
                   ) : this.state.downloading || queued ? (
                     'fa fa-spinner fa-pulse'
+                  ) : this.state.plexError ? (
+                    'fa fa-exclamation-triangle'
                   ) : 'fa fa-cloud-upload'
                 }
                 onClick={() => this.addToPlex()}
@@ -115,13 +117,17 @@ export default class SimpleAlbum extends Component {
               <Button
                 className="md-cell--right album-button"
                 tooltipLabel={
-                  this.state.processing ? 'Processing' : 'Download'
+                  this.state.processing ? 'Processing' :
+                  this.state.downloadError ? 'Error' :
+                  'Download'
                 }
                 tooltipPosition="top"
                 icon
                 iconClassName={
                   this.state.processing ? (
                     'fa fa-spinner fa-pulse'
+                  ) : this.state.downloadError ? (
+                    'fa fa-exclamation-triangle'
                   ) : 'fa fa-download'
                 }
                 onClick={() => this.downloadLocal()}

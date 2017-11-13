@@ -1,73 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import { CircularProgress } from 'react-md';
 import SimpleAlbum from '../components/SimpleAlbum';
+import Spinner from '../components/Spinner';
+import GenericError from '../components/GenericError';
 import fetchNewAlbums from '../actions/fetchNewAlbums';
 
 class NewReleases extends Component {
 
   componentWillMount() {
-    if (this.props.newAlbums.data.length === 0) {
-      this.props.fetchNewAlbums();
-    }
+    this.props.fetchNewAlbums();
   }
 
   render() {
 
     const { newAlbums, available, queue } = this.props;
 
-    const loading = (
-      <CircularProgress
-        scale={4}
-        id="loading-spinner"
-      />
-    );
-
-    const error = (
-      <h4 className="md-text-container">
-        An error occured. Try searching and selecting an artist again.
-      </h4>
-    );
-
-    if (newAlbums.loading) {
-      return loading;
-    }
-
     if (!isLoaded(available) || !isLoaded(queue)) {
       return null;
     }
 
-    if (newAlbums.error) { return error; }
+    if (newAlbums.loading) {
+      return (<Spinner />);
+    }
+
+    if (newAlbums.error) { return (<GenericError />); }
 
     const albums = newAlbums.data.newAlbums;
 
-    if (albums) {
+    return albums.map((album) => {
+
+      const isAvailable = !isEmpty(available) && available.hasOwnProperty(album.id);
+      const isQueued = !isEmpty(queue) && queue.hasOwnProperty(album.id);
+
       return (
-        <div className="md-grid">
-          {
-            albums.map((album) => {
-
-              const isAvailable = !isEmpty(available) && available.hasOwnProperty(album.id);
-              const isQueued = !isEmpty(queue) && queue.hasOwnProperty(album.id);
-
-              return (
-                <SimpleAlbum
-                  album={isAvailable ? available[album.id] : album}
-                  key={album.id}
-                  available={isAvailable}
-                  queued={isQueued}
-                  className="md-cell"
-                />
-              );
-
-            })
-          }
-        </div>
+        <SimpleAlbum
+          album={isAvailable ? available[album.id] : album}
+          key={album.id}
+          available={isAvailable}
+          queued={isQueued}
+          className="md-cell"
+        />
       );
-    }
 
-    return null;
+    });
+
   }
 }
 
