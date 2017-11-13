@@ -42,7 +42,7 @@ export default ({ album, available, queued }) => (
     </section>
 
     <section className="md-cell md-cell--5-tablet md-cell--8-desktop">
-      <TrackList tracks={album.tracks} />
+      <TrackList tracks={album.tracks} available={available} />
     </section>
 
   </Paper>

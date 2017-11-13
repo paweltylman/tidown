@@ -39,7 +39,7 @@ export default class DownloadButton extends Component {
       // create link and download zip
       const a = document.createElement('a');
       a.href = `${baseURL}/download/album/${available ? 'available' : 'temporary'}?id=${album.id}`;
-      a.download = `${album.artist.name} - ${album.title}`;
+      a.download = '';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

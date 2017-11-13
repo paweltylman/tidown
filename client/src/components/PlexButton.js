@@ -25,10 +25,12 @@ export default class PlexButton extends Component {
       return res.data.album;
     } catch (e) {
 
-      return this.setState({
+      this.setState({
         error: true,
         downloading: false,
       });
+
+      return null;
     }
   }
 

@@ -292,7 +292,10 @@ class Tidown extends Tidal {
 
       track.path = file;
 
-      return track;
+      return {
+        ...track,
+        albumPath,
+      };
     } catch (e) {
       throw e;
     }

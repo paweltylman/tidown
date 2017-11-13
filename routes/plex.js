@@ -1,4 +1,5 @@
 import express from 'express';
+import Promise from 'bluebird';
 import { tidown, fb } from '../app';
 
 const router = express.Router();
@@ -14,6 +15,11 @@ router.post('/album', async (req, res) => {
     const album = await tidown.downloadAlbum(id);
 
     album.downloaded = new Date().getTime();
+
+    const tracks = Object.keys(album.tracks).map(index => album.tracks[index]);
+
+    await Promise.map(tracks, track =>
+      fb.ref('/tracks/available').child(track.id).set(track));
 
     await fb.ref('/albums/available').child(id).set(album);
 
