@@ -38,7 +38,7 @@ router.post('/album/temporary', async (req, res) => {
 
   try {
 
-    const album = await tidown.downloadAlbum(id);
+    const album = await tidown.downloadAlbum(id, false);
 
     await fb.ref('/albums/temporary').child(id).set(album);
 
@@ -114,7 +114,7 @@ router.post('/track/temporary', async (req, res) => {
 
   try {
 
-    const track = await tidown.downloadTrack(id);
+    const track = await tidown.downloadTrack(id, false);
 
     await fb.ref('/tracks/temporary').child(id).set(track);
 
@@ -149,7 +149,7 @@ router.get('/track/temporary', async (req, res) => {
     });
 
   } catch (e) {
-    console.log(e);
+
     res.status(400).send({
       message: 'An error occurred.',
     });

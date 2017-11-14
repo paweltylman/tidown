@@ -13,34 +13,54 @@ const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4
 
 export default class TrackList extends Component {
 
+  state = {
+    processing: false,
+    error: false,
+  }
+
   downloadTrack = async (track) => {
 
     const { available } = this.props;
 
-    if (!available) {
-      const res = await api({
-        method: 'POST',
-        url: '/download/track/temporary',
-        data: {
-          id: track.id,
-        },
+    this.setState({ processing: true });
+
+    try {
+
+      if (!available) {
+        const res = await api({
+          method: 'POST',
+          url: '/download/track/temporary',
+          data: {
+            id: track.id,
+          },
+        });
+
+        track = res.data;
+      }
+
+      // create link and download zip
+      const a = document.createElement('a');
+      a.href = `${baseURL}/download/track/${available ? 'available' : 'temporary'}?id=${track.id}`;
+      a.download = '';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      this.setState({ processing: false });
+
+    } catch (e) {
+
+      this.setState({
+        processing: false,
+        error: true,
       });
-
-      track = res.data;
     }
-
-    // create link and download zip
-    const a = document.createElement('a');
-    a.href = `${baseURL}/download/track/${available ? 'available' : 'temporary'}?id=${track.id}`;
-    a.download = '';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   }
 
   render() {
 
     const { tracks } = this.props;
+    const { processing, error } = this.state;
 
     return (
       <DataTable plain>

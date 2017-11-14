@@ -6,6 +6,7 @@ import fs from 'fs-extra';
 import shell from 'shell-escape';
 import { execSync } from 'child_process';
 import Promise from 'bluebird';
+import tempy from 'tempy';
 
 /** Class */
 class Tidown extends Tidal {
@@ -268,8 +269,9 @@ class Tidown extends Tidal {
   /**
   * download and tag a track
   * @param {number} id - the Tidal track id
+  * @param {boolean} temp - whether or not to keep the track
   */
-  async downloadTrack(id) {
+  async downloadTrack(id, keep = true) {
 
     try {
 
@@ -282,7 +284,13 @@ class Tidown extends Tidal {
       track.album = album;
       track.codec = codec;
 
-      const albumPath = await this.mkdirs(album.artist.name, album.title);
+      let albumPath;
+
+      if (!keep) {
+        albumPath = tempy.directory();
+      } else {
+        albumPath = await this.mkdirs(album.artist.name, album.title);
+      }
 
       const image = await this.downloadArtwork(album, albumPath);
 
@@ -304,8 +312,9 @@ class Tidown extends Tidal {
   /**
   * download an entire album
   * @param {number} id - the Tidal album id
+  * @param {boolean} keep - whether or not to keep the album
   */
-  async downloadAlbum(id) {
+  async downloadAlbum(id, keep = true) {
 
     try {
       // most of these methods are inherited from tidal-api-wrapper
@@ -313,7 +322,13 @@ class Tidown extends Tidal {
 
       const tracks = await this.getAlbumTracks(id);
 
-      const albumPath = this.mkdirs(album.artist.name, album.title);
+      let albumPath;
+
+      if (!keep) {
+        albumPath = tempy.directory();
+      } else {
+        albumPath = this.mkdirs(album.artist.name, album.title);
+      }
 
       const image = await this.downloadArtwork(album, albumPath);
 
