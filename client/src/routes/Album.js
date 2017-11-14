@@ -1,14 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AlbumSearch from '../containers/AlbumSearch';
 import AlbumResults from '../containers/AlbumResults';
+import RecentAlbums from '../containers/RecentAlbums';
 
-export default () => (
+const Album = ({ albums }) => (
   <div>
+
     <div className="md-grid">
-      <div className="md-cell md-cell--8-desktop centered">
+      <div className="md-cell--12">
         <AlbumSearch />
       </div>
     </div>
-    <AlbumResults />
+
+    <div>
+      {
+        albums.loading || albums.data.length > 0 ? (
+          <AlbumResults />
+        ) : (<RecentAlbums />)
+      }
+    </div>
   </div>
 );
+
+const mapStateToProps = state => ({
+  albums: state.albums,
+});
+
+export default connect(mapStateToProps, null)(Album);
