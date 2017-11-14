@@ -5,6 +5,8 @@ $md-secondary-color: $md-deep-orange-a-200;
 
 @include react-md-everything;
 
+@include react-md-media-aspect-ratio(3, 2);
+
 .centered {
   margin-left: auto;
   margin-right: auto;

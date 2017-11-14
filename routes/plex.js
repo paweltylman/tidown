@@ -10,20 +10,28 @@ router.post('/album', async (req, res) => {
 
     const { id } = req.body.album;
 
-    await fb.ref('/albums/queue').child(`${id}`).set(req.body.album);
+    fb.ref('/albums/queue').child(`${id}`).set(req.body.album);
 
     const album = await tidown.downloadAlbum(id);
 
-    album.downloaded = new Date().getTime();
+    const artist = await tidown.getArtist(album.artist.id);
+
+    const time = new Date().getTime();
+
+    album.downloaded = time;
+    artist.lastDownload = time;
+    artist.picture = tidown.artistPicToUrl(artist.picture);
 
     const tracks = Object.keys(album.tracks).map(index => album.tracks[index]);
 
-    await Promise.map(tracks, track =>
+    Promise.map(tracks, track =>
       fb.ref('/tracks/available').child(track.id).set(track));
 
-    await fb.ref('/albums/available').child(id).set(album);
+    fb.ref('/albums/available').child(id).set(album);
 
-    await fb.ref('/albums/queue').child(id).remove();
+    fb.ref('/albums/queue').child(id).remove();
+
+    fb.ref('/artists').child(artist.id).set(artist);
 
     res.status(200).send({
       message: 'Successfully downloaded album.',
