@@ -6,6 +6,7 @@ import {
   MediaOverlay,
   Button,
 } from 'react-md';
+import { Link } from 'react-router-dom';
 import api from '../helpers/api';
 
 const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4321';
@@ -88,54 +89,58 @@ export default class SimpleAlbum extends Component {
     const { album, available, queued } = this.props;
 
     return (
-      <Card className="md-cell">
-        <Media aspectRatio="1-1">
-          <img src={album.cover.lg} alt="Album Art" />
-          <MediaOverlay>
-            <CardTitle title={album.artists[0].name} subtitle={album.title}>
-              <Button
-                className="md-cell--right"
-                tooltipLabel={
-                  available ? 'Available On Plex' :
-                    this.state.downloading ? 'Adding To Plex' :
-                      this.state.plexError ? 'Error' :
-                      'Add To Plex'
-                }
-                tooltipPosition="top"
-                icon
-                iconClassName={
-                  available ? (
-                    'fa fa-check'
-                  ) : this.state.downloading || queued ? (
-                    'fa fa-spinner fa-pulse'
-                  ) : this.state.plexError ? (
-                    'fa fa-exclamation-triangle'
-                  ) : 'fa fa-cloud-upload'
-                }
-                onClick={() => this.addToPlex()}
-              />
-              <Button
-                className="md-cell--right album-button"
-                tooltipLabel={
-                  this.state.processing ? 'Processing' :
-                  this.state.downloadError ? 'Error' :
-                  'Download'
-                }
-                tooltipPosition="top"
-                icon
-                iconClassName={
-                  this.state.processing ? (
-                    'fa fa-spinner fa-pulse'
-                  ) : this.state.downloadError ? (
-                    'fa fa-exclamation-triangle'
-                  ) : 'fa fa-download'
-                }
-                onClick={() => this.downloadLocal()}
-              />
-            </CardTitle>
-          </MediaOverlay>
-        </Media>
-      </Card>
+      <div className="md-cell">
+        <Link to={`/album/${album.id}`}>
+          <Card>
+            <Media aspectRatio="1-1">
+              <img src={album.cover.lg} alt="Album Art" />
+              <MediaOverlay>
+                <CardTitle title={album.artists[0].name} subtitle={album.title}>
+                  <Button
+                    className="md-cell--right"
+                    tooltipLabel={
+                    available ? 'Available On Plex' :
+                      this.state.downloading ? 'Adding To Plex' :
+                        this.state.plexError ? 'Error' :
+                        'Add To Plex'
+                  }
+                    tooltipPosition="top"
+                    icon
+                    iconClassName={
+                    available ? (
+                      'fa fa-check'
+                    ) : this.state.downloading || queued ? (
+                      'fa fa-spinner fa-pulse'
+                    ) : this.state.plexError ? (
+                      'fa fa-exclamation-triangle'
+                    ) : 'fa fa-cloud-upload'
+                  }
+                    onClick={() => this.addToPlex()}
+                  />
+                  <Button
+                    className="md-cell--right album-button"
+                    tooltipLabel={
+                    this.state.processing ? 'Processing' :
+                    this.state.downloadError ? 'Error' :
+                    'Download'
+                  }
+                    tooltipPosition="top"
+                    icon
+                    iconClassName={
+                    this.state.processing ? (
+                      'fa fa-spinner fa-pulse'
+                    ) : this.state.downloadError ? (
+                      'fa fa-exclamation-triangle'
+                    ) : 'fa fa-download'
+                  }
+                    onClick={() => this.downloadLocal()}
+                  />
+                </CardTitle>
+              </MediaOverlay>
+            </Media>
+          </Card>
+        </Link>
+      </div>
     );
   }
 }

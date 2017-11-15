@@ -7,6 +7,7 @@ import Artists from './Artists';
 import Albums from './Albums';
 import Releases from './Releases';
 import SingleArtist from './SingleArtist';
+import SingleAlbum from './SingleAlbum';
 
 export default () => (
   <div>
@@ -36,6 +37,11 @@ export default () => (
           exact
           path="/artist/:id"
           component={SingleArtist}
+        />
+        <Route
+          exact
+          path="/album/:id"
+          component={SingleAlbum}
         />
       </ScrollToTop>
     </Navdrawer>
