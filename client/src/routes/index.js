@@ -3,8 +3,8 @@ import { Route } from 'react-router';
 import Navdrawer from '../containers/Navdrawer';
 import ScrollToTop from '../components/ScrollToTop';
 import Home from './Home';
-import Artist from './Artist';
-import Album from './Album';
+import Artists from './Artists';
+import Albums from './Albums';
 import Releases from './Releases';
 
 export default () => (
@@ -19,12 +19,12 @@ export default () => (
         <Route
           exact
           path="/artists"
-          component={Artist}
+          component={Artists}
         />
         <Route
           exact
           path="/albums"
-          component={Album}
+          component={Albums}
         />
         <Route
           exact
