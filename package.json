@@ -29,7 +29,7 @@
     "sanitize-filename": "^1.6.1",
     "shell-escape": "^0.2.0",
     "tempy": "^0.2.1",
-    "tidal-api-wrapper": "^1.1.1"
+    "tidal-api-wrapper": "^1.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

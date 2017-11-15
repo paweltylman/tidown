@@ -9,7 +9,7 @@ const Artist = ({ albums }) => (
   <div>
 
     <div className="md-grid">
-      <div className="md-cell md-cell--12-desktop centered">
+      <div className="md-cell--12">
         <ArtistSearch />
       </div>
     </div>
