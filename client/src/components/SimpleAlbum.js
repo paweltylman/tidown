@@ -22,25 +22,28 @@ export default class SimpleAlbum extends Component {
 
   addToPlex = async () => {
 
-    this.setState({ downloading: true });
+    if (!this.props.available) {
+      this.setState({ downloading: true });
 
-    try {
+      try {
 
-      await api({
-        method: 'POST',
-        url: '/plex/album',
-        data: {
-          album: this.props.album,
-        },
-      });
+        await api({
+          method: 'POST',
+          url: '/plex/album',
+          data: {
+            album: this.props.album,
+          },
+        });
 
-    } catch (e) {
+      } catch (e) {
 
-      this.setState({
-        plexError: true,
-        downloading: false,
-      });
+        this.setState({
+          plexError: true,
+          downloading: false,
+        });
+      }
     }
+
   }
 
   downloadLocal = async () => {
