@@ -21,13 +21,13 @@ export default ({ tracks, available }) => (
       {
           tracks.map(track => (
             <TableRow key={track.id}>
-              <TableColumn className="md-table-column--collapse">
+              <TableColumn className="tt-title">
                 {track.title}
               </TableColumn>
-              <TableColumn>
+              <TableColumn className="tt-album">
                 {track.album.title}
               </TableColumn>
-              <TableColumn>
+              <TableColumn className="tt-button">
                 <SimpleDownloadButton track={track} available={available} />
               </TableColumn>
             </TableRow>

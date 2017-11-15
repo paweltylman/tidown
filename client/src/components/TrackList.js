@@ -23,13 +23,13 @@ export default ({
       {
           tracks.map(track => (
             <TableRow key={track.id}>
-              <TableColumn>
+              <TableColumn className="tl-number">
                 {track.trackNumber < 10 ? `0${track.trackNumber}.` : `${track.trackNumber}.`}
               </TableColumn>
-              <TableColumn className="md-table-column--collapse">
+              <TableColumn className="tl-title">
                 {track.title}
               </TableColumn>
-              <TableColumn>
+              <TableColumn className="tl-button">
                 <SimpleDownloadButton track={track} available={available} />
               </TableColumn>
             </TableRow>
