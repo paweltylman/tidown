@@ -8,14 +8,12 @@ import {
 } from 'react-md';
 import SimpleDownloadButton from './SimpleDownloadButton';
 
-export default ({
-  tracks, available, num, album,
-}) => (
+export default ({ tracks, available }) => (
   <DataTable plain>
     <TableHeader>
       <TableRow>
-        <TableColumn>Number</TableColumn>
         <TableColumn>Title</TableColumn>
+        <TableColumn>Album</TableColumn>
         <TableColumn>Download</TableColumn>
       </TableRow>
     </TableHeader>
@@ -23,11 +21,11 @@ export default ({
       {
           tracks.map(track => (
             <TableRow key={track.id}>
-              <TableColumn>
-                {track.trackNumber < 10 ? `0${track.trackNumber}.` : `${track.trackNumber}.`}
-              </TableColumn>
               <TableColumn className="md-table-column--collapse">
                 {track.title}
+              </TableColumn>
+              <TableColumn>
+                {track.album.title}
               </TableColumn>
               <TableColumn>
                 <SimpleDownloadButton track={track} available={available} />

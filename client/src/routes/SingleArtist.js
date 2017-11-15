@@ -4,7 +4,7 @@ import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import AlbumResults from '../containers/AlbumResults';
 import Spinner from '../components/Spinner';
-import TrackList from '../components/TrackList';
+import TopTracks from '../components/TopTracks';
 
 class SingleArtist extends Component {
 
@@ -39,7 +39,7 @@ class SingleArtist extends Component {
               Top Tracks
             </h1>
           </div>
-          <TrackList tracks={artist.data.topTracks} album />
+          <TopTracks tracks={artist.data.topTracks} album />
           <div className="md-grid" style={{ marginTop: 40 }}>
             <h1 className="md-cell--12">
               Albums
