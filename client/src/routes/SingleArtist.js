@@ -20,35 +20,34 @@ class SingleArtist extends Component {
 
     const { artist } = this.props;
 
-    if (artist.data) {
-
+    if (artist.loading || !artist.data) {
       return (
-        <div>
-          <div style={{ marginTop: 40 }}>
-            <div className="md-grid">
-              <h1 className="md-cell--12 md-text-center artist-header">
-                {artist.data.name}
-              </h1>
-            </div>
-            <div className="md-grid">
-              <h1 className="md-cell--12">
-                Top Tracks
-              </h1>
-            </div>
-            <TrackList tracks={artist.data.topTracks} />
-            <div className="md-grid">
-              <h1 className="md-cell--12">
-                Albums
-              </h1>
-            </div>
-            <AlbumResults />
-          </div>
-        </div>
+        <Spinner />
       );
     }
 
     return (
-      <Spinner />
+      <div>
+        <div style={{ marginTop: 40 }}>
+          <div className="md-grid">
+            <h1 className="md-cell--12 md-text-center artist-header">
+              {artist.data.name}
+            </h1>
+          </div>
+          <div className="md-grid" style={{ marginTop: 40 }}>
+            <h1 className="md-cell--12">
+              Top Tracks
+            </h1>
+          </div>
+          <TrackList tracks={artist.data.topTracks} album />
+          <div className="md-grid" style={{ marginTop: 40 }}>
+            <h1 className="md-cell--12">
+              Albums
+            </h1>
+          </div>
+          <AlbumResults />
+        </div>
+      </div>
     );
   }
 }
