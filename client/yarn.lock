@@ -6737,9 +6737,9 @@ thunky@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-0.1.0.tgz#bf30146824e2b6e67b0f2d7a4ac8beb26908684e"
 
-tidal-api-wrapper@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tidal-api-wrapper/-/tidal-api-wrapper-1.2.0.tgz#6d5fa60e95142af3d77f5ffcb4b7b03595545b43"
+tidal-api-wrapper@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/tidal-api-wrapper/-/tidal-api-wrapper-1.2.1.tgz#d5102d6f13e819efd6a362776b7c77217e62d3d2"
   dependencies:
     axios "^0.17.0"
     babel-runtime "^6.26.0"

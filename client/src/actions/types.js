@@ -14,3 +14,6 @@ export const CLEAR_ALBUMS = 'CLEAR_ALBUMS';
 export const REQ_NEW_ALBUMS = 'REQ_NEW_ALBUMS';
 export const REC_NEW_ALBUMS = 'REC_NEW_ALBUMS';
 export const ERR_NEW_ALBUMS = 'ERR_NEW_ALBUMS';
+export const REQ_ARTIST_INFO = 'REQ_ARTIST_INFO';
+export const REC_ARTIST_INFO = 'REC_ARTOST_INFO';
+export const ERR_ARTIST_INFO = 'ERR_ARTIST_INFO';

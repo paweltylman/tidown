@@ -19,15 +19,22 @@ const receiveAlbums = albums => ({
 });
 
 const fetchAlbums = query => async (dispatch) => {
+
   dispatch(requestAlbums());
   try {
+
     const albums = await tidal.search(query, 'albums', 20);
+
     albums.forEach((album) => {
       album.cover = tidal.albumArtToUrl(album.cover);
     });
+
     dispatch(receiveAlbums(filterAlbums(albums)));
+
   } catch (e) {
+
     dispatch(errorAlbums(e));
+
   }
 };
 

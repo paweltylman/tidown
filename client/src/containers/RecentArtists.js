@@ -26,7 +26,7 @@ const RecentArtists = ({ recentArtists }) => {
       <div className="md-grid">
         {
         recentArtists.reverse().map(artist => (
-          <ArtistCard artist={artist} key={artist.value.id} />
+          <ArtistCard artist={artist.value} key={artist.value.id} />
         ))
       }
       </div>

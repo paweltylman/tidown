@@ -6,6 +6,7 @@ import Home from './Home';
 import Artists from './Artists';
 import Albums from './Albums';
 import Releases from './Releases';
+import SingleArtist from './SingleArtist';
 
 export default () => (
   <div>
@@ -30,6 +31,11 @@ export default () => (
           exact
           path="/releases"
           component={Releases}
+        />
+        <Route
+          exact
+          path="/artist/:id"
+          component={SingleArtist}
         />
       </ScrollToTop>
     </Navdrawer>

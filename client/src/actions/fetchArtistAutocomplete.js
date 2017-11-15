@@ -19,18 +19,26 @@ const errorArtists = e => ({
 
 const fetchArtists = query =>
   async (dispatch) => {
+
     dispatch(requestArtists());
+
     try {
+
       const artists = await tidal.search(query, 'artists', 10);
+
       // transform picture uuid to valid link
       artists.forEach((artist) => {
         if (artist.picture) {
           artist.picture = tidal.artistPicToUrl(artist.picture);
         }
       });
+
       dispatch(receiveArtists(artists));
+
     } catch (e) {
+
       dispatch(errorArtists(e));
+
     }
   };
 

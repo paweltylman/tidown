@@ -20,7 +20,16 @@ router.post('/album', async (req, res) => {
 
     album.downloaded = time;
     artist.lastDownload = time;
-    artist.picture = tidown.artistPicToUrl(artist.picture);
+
+    if (artist.picture) {
+      artist.picture = tidown.artistPicToUrl(artist.picture);
+    } else {
+      artist.picture = {
+        sm: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+        md: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+        lg: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+      };
+    }
 
     const tracks = Object.keys(album.tracks).map(index => album.tracks[index]);
 
@@ -39,7 +48,7 @@ router.post('/album', async (req, res) => {
     });
 
   } catch (e) {
-
+    console.log(e);
     let message;
 
     if (e.response) {

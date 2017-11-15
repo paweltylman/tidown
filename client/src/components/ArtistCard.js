@@ -9,12 +9,12 @@ import {
 
 export default ({ artist }) => (
   <div className="md-cell">
-    <Link to={`/artists/${artist.value.id}`}>
+    <Link to={`/artist/${artist.id}`}>
       <Card>
         <Media aspectRatio="3-2">
-          <img src={artist.value.picture.lg} alt="Artist" />
+          <img src={artist.picture.lg} alt="Artist" />
           <MediaOverlay>
-            <CardTitle title={artist.value.name} />
+            <CardTitle title={artist.name} />
           </MediaOverlay>
         </Media>
       </Card>

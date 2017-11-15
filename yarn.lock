@@ -3460,9 +3460,9 @@ through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-tidal-api-wrapper@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tidal-api-wrapper/-/tidal-api-wrapper-1.2.0.tgz#6d5fa60e95142af3d77f5ffcb4b7b03595545b43"
+tidal-api-wrapper@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/tidal-api-wrapper/-/tidal-api-wrapper-1.2.1.tgz#d5102d6f13e819efd6a362776b7c77217e62d3d2"
   dependencies:
     axios "^0.17.0"
     babel-runtime "^6.26.0"

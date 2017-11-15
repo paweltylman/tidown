@@ -68,21 +68,20 @@ $md-secondary-color: $md-deep-orange-a-200;
   color: #ff6e40;
 }
 
-.md-table-column {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .md-table-column:first-child {
   padding-right: 10px;
-  max-width: 10%;
+  width: 10%;
 }
 
 .md-table-column:nth-child(2) {
   padding-right: 10px;
-  max-width: 80%;
+  width: 80%;
 }
 
 .md-table-column:nth-child(3) {
-  max-width: 10%;
+  width: 10%;
+}
+
+.artist-header {
+  font-size: 64px;
 }

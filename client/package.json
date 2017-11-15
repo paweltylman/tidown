@@ -19,7 +19,7 @@
     "react-scripts": "1.0.16",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "tidal-api-wrapper": "^1.2.0",
+    "tidal-api-wrapper": "^1.2.1",
     "webfontloader": "^1.6.28"
   },
   "scripts": {

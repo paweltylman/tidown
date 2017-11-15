@@ -18,15 +18,25 @@ const errorAlbum = e => ({
 });
 
 const fetchAlbum = id => async (dispatch) => {
+
   dispatch(requestAlbum());
+
   try {
+
     const album = await tidal.getAlbum(id);
+
     const tracks = await tidal.getAlbumTracks(id);
+
     album.tracks = tracks;
+
     album.cover = tidal.albumArtToUrl(album.cover);
+
     dispatch(receiveAlbum(album));
+
   } catch (e) {
+
     dispatch(errorAlbum(e));
+
   }
 };
 
