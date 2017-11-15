@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Album from '../components/Album';
+import SimpleAlbum from '../components/SimpleAlbum';
 import Spinner from '../components/Spinner';
 import GenericError from '../components/GenericError';
 
@@ -9,7 +10,9 @@ class ArtistAlbums extends Component {
 
   render() {
 
-    const { albums, available, queue } = this.props;
+    const {
+      albums, available, queue, simple,
+    } = this.props;
 
     if (!isLoaded(available) || !isLoaded(queue)) {
       return null;
@@ -26,6 +29,17 @@ class ArtistAlbums extends Component {
       const isAvailable = !isEmpty(available) && available.hasOwnProperty(album.id);
       const isQueued = !isEmpty(queue) && queue.hasOwnProperty(album.id);
 
+      if (simple) {
+        return (
+          <SimpleAlbum
+            album={isAvailable ? available[album.id] : album}
+            key={album.id}
+            available={isAvailable}
+            queued={isQueued}
+          />
+        );
+      }
+
       return (
         <Album
           album={isAvailable ? available[album.id] : album}
@@ -34,6 +48,7 @@ class ArtistAlbums extends Component {
           queued={isQueued}
         />
       );
+
 
     });
 
