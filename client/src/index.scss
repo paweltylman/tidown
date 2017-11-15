@@ -89,21 +89,18 @@ $md-secondary-color: $md-deep-orange-a-200;
   width: 45%;
 }
 
-// .md-table-column:first-child {
-//   padding-right: 10px;
-//   width: 45%;
-// }
-//
-// .md-table-column:nth-child(2) {
-//   padding-right: 10px;
-//   width: 45%;
-// }
-//
-// .md-table-column:nth-child(3) {
-//   width: 10%;
-// }
-
 .artist-header {
   font-size: 64px;
   line-height: 64px;
+}
+
+.avatar-lg {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.underline {
+  text-decoration: underline;
 }
