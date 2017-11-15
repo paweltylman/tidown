@@ -6,9 +6,9 @@ const router = express.Router();
 
 router.post('/album', async (req, res) => {
 
-  try {
+  const { id } = req.body.album;
 
-    const { id } = req.body.album;
+  try {
 
     fb.ref('/albums/queue').child(`${id}`).set(req.body.album);
 
@@ -48,7 +48,11 @@ router.post('/album', async (req, res) => {
     });
 
   } catch (e) {
-    console.log(e);
+
+    fb.ref('/albums/error').child(id).set(id);
+
+    fb.ref('/albums/queue').child(id).remove();
+
     let message;
 
     if (e.response) {
