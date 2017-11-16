@@ -4,9 +4,9 @@ import {
   Media,
   Divider,
 } from 'react-md';
-import TrackList from './TrackList';
 import PlexButton from './PlexButton';
 import DownloadButton from './DownloadButton';
+import TrackList from './TrackList';
 
 export default ({ album, available, queued }) => (
   <Paper className="md-cell md-cell--12 md-grid">
@@ -42,7 +42,7 @@ export default ({ album, available, queued }) => (
     </section>
 
     <section className="md-cell md-cell--5-tablet md-cell--8-desktop">
-      <TrackList tracks={album.tracks} available={available} />
+      <TrackList tracks={album.tracks} available={available} num />
     </section>
 
   </Paper>

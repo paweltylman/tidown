@@ -23,7 +23,7 @@ $md-secondary-color: $md-deep-orange-a-200;
   line-height: 20px;
 }
 
-.md-tile-text--primary {
+.md-tile-text--primary, .md-icon-text {
   font-size: 20px;
 }
 
@@ -66,27 +66,6 @@ $md-secondary-color: $md-deep-orange-a-200;
 .mini-icon {
   font-size: 16px;
   color: #ff6e40;
-}
-
-.tl-num {
-  width: 10%
-}
-
-.tl-title {
-  width: 80%;
-  padding-right: 10px;
-}
-
-.tl-button .tt-button {
-  width: 10%;
-}
-
-.tt-title {
-  width: 45%;
-}
-
-.tt-album {
-  width: 45%;
 }
 
 .artist-header {

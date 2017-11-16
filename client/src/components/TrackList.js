@@ -1,40 +1,24 @@
-import React, { Component } from 'react';
-import {
-  DataTable,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableColumn,
-} from 'react-md';
+import React from 'react';
+import { List, ListItem } from 'react-md';
 import SimpleDownloadButton from './SimpleDownloadButton';
 
-export default ({
-  tracks, available, num, album,
-}) => (
-  <DataTable plain>
-    <TableHeader>
-      <TableRow>
-        <TableColumn>Number</TableColumn>
-        <TableColumn>Title</TableColumn>
-        <TableColumn>Download</TableColumn>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {
-          tracks.map(track => (
-            <TableRow key={track.id}>
-              <TableColumn className="tl-number">
-                {track.trackNumber < 10 ? `0${track.trackNumber}.` : `${track.trackNumber}.`}
-              </TableColumn>
-              <TableColumn className="tl-title">
-                {track.title}
-              </TableColumn>
-              <TableColumn className="tl-button">
-                <SimpleDownloadButton track={track} available={available} />
-              </TableColumn>
-            </TableRow>
-          ))
-        }
-    </TableBody>
-  </DataTable>
+export default ({ tracks, available, num }) => (
+
+  <List>
+    {
+      tracks.map((track) => {
+
+        const trackNum = track.trackNumber < 10 ? `0${track.trackNumber}` : `${track.trackNumber}`;
+
+        return (
+          <ListItem
+            primaryText={num ? `${trackNum}. ${track.title}` : track.title}
+            secondaryText={track.album.title}
+            rightIcon={<SimpleDownloadButton track={track} available={available} />}
+          />
+        );
+      })
+    }
+  </List>
+
 );

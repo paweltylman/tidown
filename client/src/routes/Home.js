@@ -12,7 +12,7 @@ export default () => (
     <Divider className="divider-large" />
 
     <div className="md-text-container">
-      <p className="large-p">
+      <p className="large-p md-text-center">
       Tidown allows you to download music from Tidal Music. You can download
       music to your computer or if you are a member of my Plex server you can
       add music to Plex and stream from there. To get started, search for an artist

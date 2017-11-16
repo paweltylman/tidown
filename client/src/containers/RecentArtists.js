@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Spinner from '../components/Spinner';
@@ -19,7 +19,7 @@ const RecentArtists = ({ recentArtists }) => {
       <div className="md-grid" style={{ marginTop: 40, marginBottom: 20 }}>
         <div className="md-cell--12">
           <h1>
-          Recent Artists
+          Recently Added
           </h1>
         </div>
       </div>

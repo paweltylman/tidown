@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Avatar, Divider } from 'react-md';
+import { Avatar, Divider, SelectField } from 'react-md';
 import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import AlbumResults from '../containers/AlbumResults';
 import Spinner from '../components/Spinner';
-import TopTracks from '../components/TopTracks';
+import TrackList from '../components/TrackList';
+
+const viewItems = [{
+  label: 'Expanded',
+  value: 'expanded',
+}, {
+  label: 'Simple',
+  value: 'simple',
+}];
 
 class SingleArtist extends Component {
+
+  state = {
+    view: viewItems[0],
+  }
 
   componentDidMount() {
 
@@ -17,9 +29,16 @@ class SingleArtist extends Component {
     this.props.fetchArtistInfo(id);
   }
 
+  handleSelect = (value, index) => {
+    this.setState({
+      view: viewItems[index],
+    });
+  }
+
   render() {
 
     const { artist } = this.props;
+    const simple = this.state.view.value === 'simple';
 
     if (artist.loading || !artist.data) {
       return (
@@ -50,14 +69,27 @@ class SingleArtist extends Component {
               Top Tracks
             </h1>
           </div>
-          <TopTracks tracks={artist.data.topTracks} album />
+          <TrackList tracks={artist.data.topTracks} />
           <Divider />
           <div className="md-grid" style={{ marginTop: 40 }}>
-            <h1 className="md-cell--12">
-              Albums
+            <h1 className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align">
+            Albums
             </h1>
+            <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle">
+              <SelectField
+                id="albums-view-select"
+                menuItems={viewItems}
+                position={SelectField.Positions.BELOW}
+                fullWidth
+                centered
+                onChange={this.handleSelect}
+                placeholder="Album View"
+              />
+            </div>
           </div>
-          <AlbumResults />
+          <div className="md-grid">
+            <AlbumResults simple={simple} />
+          </div>
         </div>
       </div>
     );
