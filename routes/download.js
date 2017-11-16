@@ -144,7 +144,6 @@ router.get('/track/temporary', async (req, res) => {
       }
 
       await fb.ref('/tracks/temporary').child(id).remove();
-      fs.removeSync(track.albumPath);
 
     });
 
