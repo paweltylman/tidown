@@ -8,10 +8,10 @@ import Spinner from '../components/Spinner';
 import TrackList from '../components/TrackList';
 
 const viewItems = [{
-  label: 'Expanded',
+  label: 'Expanded View',
   value: 'expanded',
 }, {
-  label: 'Simple',
+  label: 'Simple View',
   value: 'simple',
 }];
 
@@ -83,7 +83,7 @@ class SingleArtist extends Component {
                 fullWidth
                 centered
                 onChange={this.handleSelect}
-                placeholder="Album View"
+                placeholder="Expanded View"
               />
             </div>
           </div>
