@@ -88,27 +88,7 @@ router.get('/album/temporary', async (req, res) => {
 
 });
 
-router.get('/track/available', async (req, res) => {
-
-  const { id } = req.query;
-
-  try {
-
-    const snapshot = await fb.ref('/tracks/available').child(id).once('value');
-    const track = snapshot.val();
-
-    res.download(track.path);
-
-  } catch (e) {
-
-    res.status(400).send({
-      message: 'An error occurred.',
-    });
-
-  }
-});
-
-router.post('/track/temporary', async (req, res) => {
+router.post('/track', async (req, res) => {
 
   const { id } = req.body;
 
@@ -116,7 +96,7 @@ router.post('/track/temporary', async (req, res) => {
 
     const track = await tidown.downloadTrack(id, false);
 
-    await fb.ref('/tracks/temporary').child(id).set(track);
+    // await fb.ref('/tracks/temporary').child(id).set(track);
 
     res.status(200).send(track);
 
@@ -129,21 +109,21 @@ router.post('/track/temporary', async (req, res) => {
   }
 });
 
-router.get('/track/temporary', async (req, res) => {
+router.get('/track', async (req, res) => {
 
-  const { id } = req.query;
+  const { path } = req.query;
 
   try {
 
-    const snapshot = await fb.ref('/tracks/temporary').child(id).once('value');
-    const track = snapshot.val();
+    // const snapshot = await fb.ref('/tracks/temporary').child(id).once('value');
+    // const track = snapshot.val();
 
-    await res.download(track.path, async (err) => {
+    res.download(path, async (err) => {
       if (err) {
         throw err;
       }
 
-      await fb.ref('/tracks/temporary').child(id).remove();
+      // await fb.ref('/tracks/temporary').child(id).remove();
 
     });
 

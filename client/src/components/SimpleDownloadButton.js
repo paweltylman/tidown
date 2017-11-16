@@ -17,9 +17,10 @@ export default class SimpleDownloadButton extends Component {
 
     this.setState({ processing: true });
 
-    try {
+    if (!available) {
 
-      if (!available) {
+      try {
+
         const res = await api({
           method: 'POST',
           url: '/download/track/temporary',
@@ -29,20 +30,21 @@ export default class SimpleDownloadButton extends Component {
         });
 
         track = res.data;
+
+
+      } catch (e) {
+
+        this.setState({
+          processing: false,
+          error: true,
+        });
+
       }
-
-    } catch (e) {
-
-      this.setState({
-        processing: false,
-        error: true,
-      });
-
     }
 
-    // create link and download zip
+
     const a = document.createElement('a');
-    a.href = `${baseURL}/download/track/${available ? 'available' : 'temporary'}?id=${track.id}`;
+    a.href = `${baseURL}/download/track?path=${track.path}`;
     a.download = '';
     document.body.appendChild(a);
     a.click();
