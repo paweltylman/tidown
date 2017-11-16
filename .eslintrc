@@ -17,6 +17,7 @@
     "no-nested-ternary": 0,
     "no-prototype-builtins": 0,
     "no-unused-vars": 0,
-    "no-shadow": 0
+    "no-shadow": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

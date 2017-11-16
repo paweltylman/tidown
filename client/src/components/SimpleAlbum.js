@@ -93,23 +93,24 @@ export default class SimpleAlbum extends Component {
 
     return (
       <div className="md-cell">
-        <Link to={`/album/${album.id}`}>
-          <Card>
-            <Media aspectRatio="1-1">
+        <Card>
+          <Media aspectRatio="1-1">
+            <Link to={`/album/${album.id}`}>
               <img src={album.cover.lg} alt="Album Art" />
-              <MediaOverlay>
-                <CardTitle title={album.artists[0].name} subtitle={album.title}>
-                  <Button
-                    className="md-cell--right"
-                    tooltipLabel={
+            </Link>
+            <MediaOverlay>
+              <CardTitle title={album.artists[0].name} subtitle={album.title}>
+                <Button
+                  className="md-cell--right"
+                  tooltipLabel={
                     available ? 'Available On Plex' :
                       this.state.downloading ? 'Adding To Plex' :
                         this.state.plexError ? 'Error' :
                         'Add To Plex'
                   }
-                    tooltipPosition="top"
-                    icon
-                    iconClassName={
+                  tooltipPosition="top"
+                  icon
+                  iconClassName={
                     available ? (
                       'fa fa-check'
                     ) : this.state.downloading || queued ? (
@@ -118,31 +119,30 @@ export default class SimpleAlbum extends Component {
                       'fa fa-exclamation-triangle'
                     ) : 'fa fa-cloud-upload'
                   }
-                    onClick={() => this.addToPlex()}
-                  />
-                  <Button
-                    className="md-cell--right album-button"
-                    tooltipLabel={
+                  onClick={() => this.addToPlex()}
+                />
+                <Button
+                  className="md-cell--right album-button"
+                  tooltipLabel={
                     this.state.processing ? 'Processing' :
                     this.state.downloadError ? 'Error' :
                     'Download'
                   }
-                    tooltipPosition="top"
-                    icon
-                    iconClassName={
+                  tooltipPosition="top"
+                  icon
+                  iconClassName={
                     this.state.processing ? (
                       'fa fa-spinner fa-pulse'
                     ) : this.state.downloadError ? (
                       'fa fa-exclamation-triangle'
                     ) : 'fa fa-download'
                   }
-                    onClick={() => this.downloadLocal()}
-                  />
-                </CardTitle>
-              </MediaOverlay>
-            </Media>
-          </Card>
-        </Link>
+                  onClick={() => this.downloadLocal()}
+                />
+              </CardTitle>
+            </MediaOverlay>
+          </Media>
+        </Card>
       </div>
     );
   }
