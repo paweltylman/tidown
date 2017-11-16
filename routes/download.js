@@ -76,8 +76,6 @@ router.get('/album/temporary', async (req, res) => {
 
     await fb.ref('/albums/temporary').child(album.id).remove();
 
-    fs.removeSync(album.path);
-
   } catch (e) {
 
     res.status(400).send({
@@ -96,8 +94,6 @@ router.post('/track', async (req, res) => {
 
     const track = await tidown.downloadTrack(id, false);
 
-    // await fb.ref('/tracks/temporary').child(id).set(track);
-
     res.status(200).send(track);
 
   } catch (e) {
@@ -115,15 +111,10 @@ router.get('/track', async (req, res) => {
 
   try {
 
-    // const snapshot = await fb.ref('/tracks/temporary').child(id).once('value');
-    // const track = snapshot.val();
-
-    res.download(path, async (err) => {
+    res.download(path, (err) => {
       if (err) {
         throw err;
       }
-
-      // await fb.ref('/tracks/temporary').child(id).remove();
 
     });
 
