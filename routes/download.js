@@ -4,23 +4,20 @@ import { tidown, fb } from '../app';
 
 const router = express.Router();
 
-router.get('/album/available', async (req, res) => {
+router.get('/album', async (req, res) => {
 
-  const { id } = req.query;
+  const { path, artist, album } = req.query;
 
   try {
 
-    const snapshot = await fb.ref(`/albums/available/${id}`).once('value');
-    const album = snapshot.val();
-
-    await res.zip({
+    res.zip({
       files: [
         {
-          path: album.path,
-          name: `${album.artist.name} - ${album.title}`,
+          path,
+          name: `${artist} - ${album}`,
         },
       ],
-      filename: `${album.artist.name} - ${album.title}.zip`,
+      filename: `${artist} - ${album}.zip`,
     });
 
   } catch (e) {
@@ -32,15 +29,13 @@ router.get('/album/available', async (req, res) => {
   }
 });
 
-router.post('/album/temporary', async (req, res) => {
+router.post('/album', async (req, res) => {
 
   const { id } = req.body;
 
   try {
 
     const album = await tidown.downloadAlbum(id, false);
-
-    await fb.ref('/albums/temporary').child(id).set(album);
 
     res.status(200).send({
       album,

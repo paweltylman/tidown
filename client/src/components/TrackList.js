@@ -12,6 +12,7 @@ export default ({ tracks, available, num }) => (
 
         return (
           <ListItem
+            key={track.id}
             primaryText={num ? `${trackNum}. ${track.title}` : track.title}
             secondaryText={track.album.title}
             rightIcon={<SimpleDownloadButton track={track} available={available} />}

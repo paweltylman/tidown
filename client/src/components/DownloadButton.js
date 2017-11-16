@@ -13,44 +13,46 @@ export default class DownloadButton extends Component {
 
   downloadLocal = async () => {
 
-    try {
+    const { available } = this.props;
+    let { album } = this.props;
 
-      const { available } = this.props;
-      let { album } = this.props;
+    if (!available) {
 
-      if (!available) {
+      try {
 
         this.setState({ processing: true });
 
         const res = await api({
           method: 'POST',
-          url: '/download/album/temporary',
+          url: '/download/album',
           data: {
-            id: this.props.album.id,
+            id: album.id,
           },
         });
 
         album = res.data.album; // eslint-disable-line prefer-destructuring
 
         this.setState({ processing: false });
+      } catch (e) {
+
+        this.setState({ processing: false, error: true });
 
       }
 
-      // create link and download zip
-      const a = document.createElement('a');
-      a.href = `${baseURL}/download/album/${available ? 'available' : 'temporary'}?id=${album.id}`;
-      a.download = '';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-    } catch (e) {
-
-      this.setState({ processing: false, error: true });
-
     }
 
+    const url = `${baseURL}/download/album/?path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+
+    // create link and download zip
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
   }
+
   render() {
 
     let text = 'Download';
