@@ -23,7 +23,7 @@ export default class SimpleDownloadButton extends Component {
 
         const res = await api({
           method: 'POST',
-          url: '/download/track/temporary',
+          url: '/download/track',
           data: {
             id: track.id,
           },
