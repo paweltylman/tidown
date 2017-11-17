@@ -75,6 +75,7 @@ export default class SimpleAlbum extends Component {
       }
 
     }
+
     const params = `path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
     const url = `${baseURL}/download/album/?${params}`;
 

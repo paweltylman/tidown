@@ -4,7 +4,6 @@ import { Avatar, Divider, SelectField } from 'react-md';
 import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import BackArrow from '../components/BackArrow';
-import UpArrow from '../components/UpArrow';
 import AlbumResults from '../containers/AlbumResults';
 import Spinner from '../components/Spinner';
 import TrackList from '../components/TrackList';
@@ -105,8 +104,6 @@ class SingleArtist extends Component {
           </div>
 
         </div>
-
-        <UpArrow />
 
       </div>
     );

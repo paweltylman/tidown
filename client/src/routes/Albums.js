@@ -14,11 +14,7 @@ const Album = ({ albums }) => (
     </div>
 
     <div>
-      {
-        albums.loading || albums.data.length > 0 ? (
-          <AlbumResults />
-        ) : (<RecentAlbums />)
-      }
+      <RecentAlbums />
     </div>
   </div>
 );

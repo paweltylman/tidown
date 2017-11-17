@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Autocomplete, Avatar } from 'react-md';
 import { throttle } from 'lodash';
 import fetchAlbumAutocomplete from '../actions/fetchAlbumAutocomplete';
-import fetchAlbum from '../actions/fetchAlbum';
 
 class AlbumSearch extends Component {
 
@@ -17,7 +17,7 @@ class AlbumSearch extends Component {
 
   handleAutocomplete = (value, index, matches) => {
     const { id } = matches[index];
-    this.props.fetchAlbum(id);
+    this.props.push(`/album/${id}`);
   }
 
   render() {
@@ -52,7 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchAlbumAutocomplete,
-  fetchAlbum,
+  push,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumSearch);

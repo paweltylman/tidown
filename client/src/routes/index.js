@@ -12,38 +12,36 @@ import SingleAlbum from './SingleAlbum';
 export default () => (
   <div>
     <Navdrawer>
-      <ScrollToTop>
-        <Route
-          exact
-          path="/"
-          component={Home}
-        />
-        <Route
-          exact
-          path="/artists"
-          component={Artists}
-        />
-        <Route
-          exact
-          path="/albums"
-          component={Albums}
-        />
-        <Route
-          exact
-          path="/releases"
-          component={Releases}
-        />
-        <Route
-          exact
-          path="/artist/:id"
-          component={SingleArtist}
-        />
-        <Route
-          exact
-          path="/album/:id"
-          component={SingleAlbum}
-        />
-      </ScrollToTop>
+      <Route
+        exact
+        path="/"
+        component={Home}
+      />
+      <Route
+        exact
+        path="/artists"
+        component={Artists}
+      />
+      <Route
+        exact
+        path="/albums"
+        component={Albums}
+      />
+      <Route
+        exact
+        path="/releases"
+        component={Releases}
+      />
+      <Route
+        exact
+        path="/artist/:id"
+        component={SingleArtist}
+      />
+      <Route
+        exact
+        path="/album/:id"
+        component={SingleAlbum}
+      />
     </Navdrawer>
   </div>
 );

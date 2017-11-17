@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavigationDrawer, FontIcon } from 'react-md';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import UpArrow from '../components/UpArrow';
 import clearAlbums from '../actions/clearAlbums';
 
 const navItems = [{
@@ -47,6 +48,7 @@ class Navdrawer extends Component {
           contentClassName="md-grid"
         >
           {this.props.children}
+          <UpArrow />
         </NavigationDrawer>
       </div>
     );

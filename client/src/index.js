@@ -14,6 +14,10 @@ WebFontLoader.load({
   },
 });
 
+history.listen((location) => {
+  window.scrollTo(0, 0);
+});
+
 ReactDOM.render(
   (
     <Provider store={store}>
