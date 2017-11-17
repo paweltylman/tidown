@@ -12,13 +12,19 @@ export default class UpArrow extends Component {
   }
 
   componentWillMount() {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 1050) {
-        this.setState({ show: true });
-      } else {
-        this.setState({ show: false });
-      }
-    });
+    window.addEventListener('scroll', this.showButton);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.showButton);
+  }
+
+  showButton = () => {
+    if (window.scrollY > 1050) {
+      this.setState({ show: true });
+    } else {
+      this.setState({ show: false });
+    }
   }
 
   render() {
