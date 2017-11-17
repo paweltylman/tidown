@@ -20,7 +20,7 @@ const RecentAlbums = ({ recentAlbums, available }) => {
     <div>
       <div className="md-grid" style={{ marginTop: 40, marginBottom: 20 }}>
         <div className="md-cell--12">
-          <h1>
+          <h1 className="blk">
           Recently Added
           </h1>
         </div>

@@ -68,7 +68,7 @@ class SingleArtist extends Component {
           <Divider />
 
           <div className="md-grid" style={{ marginTop: 40 }}>
-            <h1 className="md-cell--12" style={{ color: 'black' }}>
+            <h1 className="md-cell--12 blk">
               Top Tracks
             </h1>
           </div>
@@ -79,8 +79,7 @@ class SingleArtist extends Component {
 
           <div className="md-grid" style={{ marginTop: 40 }}>
             <h1
-              className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align"
-              style={{ color: 'black' }}
+              className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align blk"
             >
             Albums
             </h1>
