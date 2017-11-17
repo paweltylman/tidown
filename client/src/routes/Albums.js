@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AlbumSearch from '../containers/AlbumSearch';
-import AlbumResults from '../containers/AlbumResults';
 import RecentAlbums from '../containers/RecentAlbums';
 
 const Album = ({ albums }) => (

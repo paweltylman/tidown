@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Navdrawer from '../containers/Navdrawer';
-import ScrollToTop from '../components/ScrollToTop';
 import Home from './Home';
 import Artists from './Artists';
 import Albums from './Albums';
