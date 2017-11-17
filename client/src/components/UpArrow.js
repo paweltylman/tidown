@@ -38,38 +38,36 @@ export default class UpArrow extends Component {
     return (
       <div>
         <MediaQuery minWidth={768}>
-          <Button
-            secondary
-            floating
-            mini
-            iconEl={<FontIcon>arrow_upward</FontIcon>}
-            style={{
-          position: 'fixed',
-          left: 16,
-          bottom: 20,
-          zIndex: 999,
-        }}
-            onClick={scroll.scrollToTop}
-          >
-        Back
-          </Button>
-        </MediaQuery>
-        <MediaQuery maxWidth={768}>
-          <Button
-            secondary
-            floating
-            mini
-            iconEl={<FontIcon>arrow_upward</FontIcon>}
-            style={{
-          position: 'fixed',
-          left: 12,
-          bottom: 20,
-          zIndex: 999,
-        }}
-            onClick={scroll.scrollToTop}
-          >
-        Back
-          </Button>
+          {
+            (matches) => {
+
+              let positionLeft;
+
+              if (matches) {
+                positionLeft = 16;
+              } else {
+                positionLeft = 11;
+              }
+
+              return (
+                <Button
+                  secondary
+                  floating
+                  mini
+                  iconEl={<FontIcon>arrow_upward</FontIcon>}
+                  style={{
+                    position: 'fixed',
+                    left: positionLeft,
+                    bottom: 20,
+                    zIndex: 999,
+                  }}
+                  onClick={scroll.scrollToTop}
+                >
+                Back
+                </Button>
+              );
+            }
+          }
         </MediaQuery>
       </div>
     );
