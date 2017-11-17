@@ -30,7 +30,7 @@ export default class Releases extends Component {
       <div style={{ marginTop: 40 }}>
         <div className="md-grid">
           <h1 className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align">
-            {`${this.state.view.label}:`}
+            {`${this.state.view.label}`}
           </h1>
           <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle">
             <SelectField

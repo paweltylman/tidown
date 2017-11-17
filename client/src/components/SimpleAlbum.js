@@ -75,10 +75,10 @@ export default class SimpleAlbum extends Component {
       }
 
     }
+    const params = `path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+    const url = `${baseURL}/download/album/?${params}`;
 
-    const url = `${baseURL}/download/album/?path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
-
-    // create link and download zip
+    // create link and download
     const a = document.createElement('a');
     a.href = url;
     a.download = '';

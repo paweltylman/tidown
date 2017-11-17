@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import Debug from 'debug';
 import express from 'express';
+import queue from 'express-queue';
 import logger from 'morgan';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -43,6 +44,7 @@ app.use(cors());
 // easy zip
 app.use(zip());
 
+app.use('/plex', queue({ activeLimit: 2, queuedLimit: -1 }));
 app.use('/plex', plex);
 app.use('/download', download);
 
