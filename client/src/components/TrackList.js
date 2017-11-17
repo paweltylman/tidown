@@ -4,7 +4,11 @@ import SimpleDownloadButton from './SimpleDownloadButton';
 
 export default ({ tracks, available, num }) => (
 
-  <List>
+  <List
+    style={{
+      backgroundColor: '#fafafa',
+    }}
+  >
     {
       tracks.map((track) => {
 

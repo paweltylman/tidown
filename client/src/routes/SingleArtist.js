@@ -48,7 +48,8 @@ class SingleArtist extends Component {
 
     return (
       <div>
-        <div style={{ marginTop: 40 }}>
+        <div>
+
           <div className="md-grid">
             <div className="md-cell--12 md-text-center">
               <Avatar
@@ -63,16 +64,24 @@ class SingleArtist extends Component {
               </h1>
             </div>
           </div>
+
           <Divider />
+
           <div className="md-grid" style={{ marginTop: 40 }}>
-            <h1 className="md-cell--12">
+            <h1 className="md-cell--12" style={{ color: 'black' }}>
               Top Tracks
             </h1>
           </div>
+
           <TrackList tracks={artist.data.topTracks} />
-          <Divider />
+
+          <Divider style={{ marginTop: 50 }} />
+
           <div className="md-grid" style={{ marginTop: 40 }}>
-            <h1 className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align">
+            <h1
+              className="md-cell--8-desktop md-cell--5-tablet md-cell--4-phone album-align"
+              style={{ color: 'black' }}
+            >
             Albums
             </h1>
             <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle">
@@ -87,9 +96,11 @@ class SingleArtist extends Component {
               />
             </div>
           </div>
+
           <div className="md-grid">
             <AlbumResults simple={simple} />
           </div>
+
         </div>
       </div>
     );
