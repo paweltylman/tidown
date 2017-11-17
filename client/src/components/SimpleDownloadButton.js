@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-md';
+import { FontIcon } from 'react-md';
 import api from '../helpers/api';
 
 const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4321';
@@ -61,10 +61,8 @@ export default class SimpleDownloadButton extends Component {
     const { error, processing } = this.state;
 
     return (
-
-      <Button
+      <FontIcon
         secondary
-        icon
         iconClassName={
           processing ?
             'fa fa-spinner fa-pulse mini-icon'

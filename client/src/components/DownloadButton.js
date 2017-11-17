@@ -41,7 +41,8 @@ export default class DownloadButton extends Component {
 
     }
 
-    const url = `${baseURL}/download/album/?path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+    const params = `path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+    const url = `${baseURL}/download/album/?${params}`;
 
     // create link and download zip
     const a = document.createElement('a');
@@ -62,6 +63,7 @@ export default class DownloadButton extends Component {
     } else if (this.state.error) {
       text = 'Error';
     }
+
     return (
       <Button
         disabled={this.state.processing || this.state.error}

@@ -8,6 +8,7 @@ import {
 } from 'react-md';
 
 export default ({ artist }) => (
+
   <div className="md-cell">
     <Link to={`/artist/${artist.id}`}>
       <Card>
@@ -20,4 +21,5 @@ export default ({ artist }) => (
       </Card>
     </Link>
   </div>
+
 );
