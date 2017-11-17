@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchAlbum from '../actions/fetchAlbum';
+import BackArrow from '../components/BackArrow';
 import AlbumResults from '../containers/AlbumResults';
 
 class SingleAlbum extends Component {
@@ -13,7 +14,12 @@ class SingleAlbum extends Component {
 
   render() {
     return (
-      <AlbumResults />
+      <div>
+        <div style={{ margin: '20px 0px 40px 10px' }}>
+          <BackArrow />
+        </div>
+        <AlbumResults />
+      </div>
     );
   }
 }

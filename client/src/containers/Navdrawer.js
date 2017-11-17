@@ -29,9 +29,6 @@ class Navdrawer extends Component {
     this.navItems = navItems.map(item => ({
       ...item,
       onClick: () => {
-        if (item.path !== this.props.path) {
-          this.props.clearAlbums();
-        }
         this.props.push(item.path);
       },
     }));
