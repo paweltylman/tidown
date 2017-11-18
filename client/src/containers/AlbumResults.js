@@ -41,19 +41,12 @@ class ArtistAlbums extends Component {
       }
 
       return (
-        <div>
-          {
-            albums.data.length === 1 ? (
-              <h1 className="md-text-center">{albums.data[0].title}</h1>
-            ) : null
-          }
-          <Album
-            album={isAvailable ? available[album.id] : album}
-            key={album.id}
-            available={isAvailable}
-            queued={isQueued}
-          />
-        </div>
+        <Album
+          album={isAvailable ? available[album.id] : album}
+          key={album.id}
+          available={isAvailable}
+          queued={isQueued}
+        />
       );
 
 

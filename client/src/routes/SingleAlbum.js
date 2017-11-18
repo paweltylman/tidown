@@ -13,11 +13,19 @@ class SingleAlbum extends Component {
   }
 
   render() {
+
+    const { albums } = this.props;
+
     return (
       <div>
         <div style={{ margin: '20px 0px 40px 10px' }}>
           <BackArrow />
         </div>
+        {
+          albums.data.length === 1 ? (
+            <h1 className="md-text-center">{albums.data[0].title}</h1>
+          ) : null
+        }
         <AlbumResults />
       </div>
     );
@@ -28,4 +36,8 @@ const mapDispatchToProps = {
   fetchAlbum,
 };
 
-export default connect(null, mapDispatchToProps)(SingleAlbum);
+const mapStateToProps = state => ({
+  albums: state.albums,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAlbum);
