@@ -50,37 +50,6 @@ router.post('/album', async (req, res) => {
   }
 });
 
-router.get('/album/temporary', async (req, res) => {
-
-  const { id } = req.query;
-
-  try {
-
-    const snapshot = await fb.ref(`/albums/temporary/${id}`).once('value');
-    const album = snapshot.val();
-
-    await res.zip({
-      files: [
-        {
-          path: album.path,
-          name: `${album.artist.name} - ${album.title}`,
-        },
-      ],
-      filename: `${album.artist.name} - ${album.title}.zip`,
-    });
-
-    await fb.ref('/albums/temporary').child(album.id).remove();
-
-  } catch (e) {
-
-    res.status(400).send({
-      message: 'An error occurred.',
-    });
-
-  }
-
-});
-
 router.post('/track', async (req, res) => {
 
   const { id } = req.body;
