@@ -106,7 +106,7 @@ export default class SimpleAlbum extends Component {
                   className="md-cell--right"
                   tooltipLabel={
                     available ? 'Available On Plex' :
-                      this.state.downloading ? 'Adding To Plex' :
+                      this.state.downloading || queued ? 'Adding To Plex' :
                         this.state.plexError ? 'Error' :
                         'Add To Plex'
                   }
