@@ -22,7 +22,7 @@ class SingleAlbum extends Component {
           <BackArrow />
         </div>
         {
-          albums.data.length === 1 ? (
+          albums.data.length === 1 && !albums.loading ? (
             <h1 className="md-text-center">{albums.data[0].title}</h1>
           ) : null
         }
