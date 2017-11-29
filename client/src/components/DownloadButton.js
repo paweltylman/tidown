@@ -13,10 +13,10 @@ export default class DownloadButton extends Component {
 
   downloadLocal = async () => {
 
-    const { available } = this.props;
-    let { album } = this.props;
+    let { path } = this.props;
+    const { album } = this.props;
 
-    if (!available) {
+    if (!path) {
 
       try {
 
@@ -30,7 +30,7 @@ export default class DownloadButton extends Component {
           },
         });
 
-        album = res.data.album; // eslint-disable-line prefer-destructuring
+        path = res.data.album.path; // eslint-disable-line prefer-destructuring
 
         this.setState({ processing: false });
       } catch (e) {
@@ -41,7 +41,7 @@ export default class DownloadButton extends Component {
 
     }
 
-    const params = `path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+    const params = `path=${path}&artist=${album.artist.name}&album=${album.title}`;
     const url = `${baseURL}/download/album/?${params}`;
 
     // create link and download zip

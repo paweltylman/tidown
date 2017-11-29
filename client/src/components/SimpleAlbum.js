@@ -22,7 +22,7 @@ export default class SimpleAlbum extends Component {
 
   addToPlex = async () => {
 
-    if (!this.props.available) {
+    if (!this.props.path) {
       this.setState({ downloading: true });
 
       try {
@@ -48,10 +48,10 @@ export default class SimpleAlbum extends Component {
 
   downloadLocal = async () => {
 
-    const { available } = this.props;
-    let { album } = this.props;
+    let { path } = this.props;
+    const { album } = this.props;
 
-    if (!available) {
+    if (!path) {
 
       try {
 
@@ -65,7 +65,7 @@ export default class SimpleAlbum extends Component {
           },
         });
 
-        album = res.data.album; // eslint-disable-line prefer-destructuring
+        path = res.data.path; // eslint-disable-line prefer-destructuring
 
         this.setState({ processing: false });
       } catch (e) {
@@ -76,7 +76,7 @@ export default class SimpleAlbum extends Component {
 
     }
 
-    const params = `path=${album.path}&artist=${album.artist.name}&album=${album.title}`;
+    const params = `path=${path}&artist=${album.artist.name}&album=${album.title}`;
     const url = `${baseURL}/download/album/?${params}`;
 
     // create link and download
@@ -91,7 +91,7 @@ export default class SimpleAlbum extends Component {
 
   render() {
 
-    const { album, available, queued } = this.props;
+    const { album, path } = this.props;
 
     return (
       <div className="md-cell">
@@ -105,17 +105,17 @@ export default class SimpleAlbum extends Component {
                 <Button
                   className="md-cell--right"
                   tooltipLabel={
-                    available ? 'Available On Plex' :
-                      this.state.downloading || queued ? 'Adding To Plex' :
+                    path ? 'Available On Plex' :
+                      this.state.downloading ? 'Adding To Plex' :
                         this.state.plexError ? 'Error' :
                         'Add To Plex'
                   }
                   tooltipPosition="top"
                   icon
                   iconClassName={
-                    available ? (
+                    path ? (
                       'fa fa-check'
-                    ) : this.state.downloading || queued ? (
+                    ) : this.state.downloading ? (
                       'fa fa-spinner fa-pulse'
                     ) : this.state.plexError ? (
                       'fa fa-exclamation-triangle'

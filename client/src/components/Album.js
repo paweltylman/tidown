@@ -8,7 +8,7 @@ import PlexButton from './PlexButton';
 import DownloadButton from './DownloadButton';
 import TrackList from './TrackList';
 
-export default ({ album, available, queued }) => (
+export default ({ album, path }) => (
 
   <Paper className="md-cell md-cell--12 md-grid">
 
@@ -32,18 +32,18 @@ export default ({ album, available, queued }) => (
 
       <div className="md-grid">
         <div className="md-cell--12 download">
-          <PlexButton available={available} queued={queued} album={album} />
+          <PlexButton path={path} album={album} />
         </div>
 
         <div className="md-cell--12 download">
-          <DownloadButton available={available} queued={queued} album={album} />
+          <DownloadButton path={path} album={album} />
         </div>
       </div>
 
     </section>
 
     <section className="md-cell md-cell--5-tablet md-cell--8-desktop">
-      <TrackList tracks={album.tracks} available={available} num />
+      <TrackList tracks={album.tracks} path={path} num />
     </section>
 
   </Paper>

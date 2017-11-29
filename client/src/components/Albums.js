@@ -52,17 +52,17 @@ export default class Albums extends Component {
             if (this.state.view.value === 'simple') {
               return (
                 <SimpleAlbum
-                  album={isAvailable ? available[album.id] : album}
+                  album={album}
                   key={album.id}
-                  available={isAvailable}
+                  path={isAvailable ? available[album.id].path : null}
                 />
               );
             }
               return (
                 <Album
-                  album={isAvailable ? available[album.id] : album}
+                  album={album}
                   key={album.id}
-                  available={isAvailable}
+                  path={isAvailable ? available[album.id].path : null}
                 />
               );
 

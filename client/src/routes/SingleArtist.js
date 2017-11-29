@@ -59,6 +59,7 @@ class SingleArtist extends Component {
 const mapStateToProps = state => ({
   artist: state.artist,
   albums: state.albums,
+  available: state.firebase.data.available,
 });
 
 const mapDispatchToProps = {
