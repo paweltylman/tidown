@@ -52,7 +52,12 @@ class SingleArtist extends Component {
 
         <TrackList tracks={artist.data.topTracks} />
 
-        <Albums albums={artist.data.albums} available={available} title="Albums" />
+        <Albums
+          albums={artist.data.albums}
+          available={available}
+          title="Albums"
+          showViewToggle
+        />
       </div>
     );
 

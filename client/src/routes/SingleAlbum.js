@@ -28,7 +28,10 @@ class SingleAlbum extends Component {
 
         <BackArrow />
 
-        <Albums albums={albums.data} />
+        <Albums
+          albums={albums.data}
+          title={albums.data[0].title}
+        />
 
       </div>
     );

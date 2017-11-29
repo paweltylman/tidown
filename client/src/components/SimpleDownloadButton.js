@@ -13,35 +13,29 @@ export default class SimpleDownloadButton extends Component {
 
   downloadTrack = async (track) => {
 
-    const { available } = this.props;
-
     this.setState({ processing: true });
 
-    if (!available) {
+    try {
 
-      try {
+      const res = await api({
+        method: 'POST',
+        url: '/download/track',
+        data: {
+          id: track.id,
+        },
+      });
 
-        const res = await api({
-          method: 'POST',
-          url: '/download/track',
-          data: {
-            id: track.id,
-          },
-        });
-
-        track = res.data;
+      track = res.data;
 
 
-      } catch (e) {
+    } catch (e) {
 
-        this.setState({
-          processing: false,
-          error: true,
-        });
+      this.setState({
+        processing: false,
+        error: true,
+      });
 
-      }
     }
-
 
     const a = document.createElement('a');
     a.href = `${baseURL}/download/track?path=${track.path}`;

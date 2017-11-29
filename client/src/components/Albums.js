@@ -34,17 +34,21 @@ export default class Albums extends Component {
         >
           {this.props.title}
         </h1>
-        <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle">
-          <SelectField
-            id="albums-view-select"
-            menuItems={viewItems}
-            position={SelectField.Positions.BELOW}
-            fullWidth
-            centered
-            onChange={this.handleSelect}
-            placeholder="Album View"
-          />
-        </div>
+        {
+          this.props.showViewToggle ? (
+            <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle">
+              <SelectField
+                id="albums-view-select"
+                menuItems={viewItems}
+                position={SelectField.Positions.BELOW}
+                fullWidth
+                centered
+                onChange={this.handleSelect}
+                placeholder="Album View"
+              />
+            </div>
+          ) : null
+        }
         {
           albums.map((album) => {
 

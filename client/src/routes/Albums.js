@@ -20,6 +20,7 @@ const AlbumPage = ({ recentArtists, albums }) => (
               albums={sortRecentAlbums(recentArtists)}
               view="simple"
               title="Recently Added"
+              showViewToggle
             />
           </div>
         ) : null

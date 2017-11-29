@@ -43,7 +43,7 @@ export default ({ album, path }) => (
     </section>
 
     <section className="md-cell md-cell--5-tablet md-cell--8-desktop">
-      <TrackList tracks={album.tracks} path={path} num />
+      <TrackList tracks={album.tracks} num />
     </section>
 
   </Paper>
