@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchAlbum from '../actions/fetchAlbum';
 import BackArrow from '../components/BackArrow';
-import AlbumResults from '../containers/AlbumResults';
+import Albums from '../components/Albums';
+import Spinner from '../components/Spinner';
 
 class SingleAlbum extends Component {
 
@@ -16,17 +17,19 @@ class SingleAlbum extends Component {
 
     const { albums } = this.props;
 
+    if (albums.loading || !albums.data.length > 0) {
+      return (
+        <Spinner />
+      );
+    }
+
     return (
       <div>
-        <div style={{ margin: '20px 0px 40px 10px' }}>
-          <BackArrow />
-        </div>
-        {
-          albums.data.length === 1 && !albums.loading ? (
-            <h1 className="md-text-center">{albums.data[0].title}</h1>
-          ) : null
-        }
-        <AlbumResults />
+
+        <BackArrow />
+
+        <Albums albums={albums.data} />
+
       </div>
     );
   }

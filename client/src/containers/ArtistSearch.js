@@ -4,7 +4,6 @@ import { Autocomplete, Avatar, FontIcon } from 'react-md';
 import { throttle } from 'lodash';
 import { push } from 'react-router-redux';
 import fetchArtistAutocomplete from '../actions/fetchArtistAutocomplete';
-import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 
 class ArtistSearch extends Component {
 
@@ -58,7 +57,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchArtistAutocomplete,
-  fetchArtistAlbums,
   push,
 };
 

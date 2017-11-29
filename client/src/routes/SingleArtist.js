@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Avatar, Divider, SelectField } from 'react-md';
-import fetchArtistAlbums from '../actions/fetchArtistAlbums';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import BackArrow from '../components/BackArrow';
 import Albums from '../components/Albums';
@@ -68,7 +67,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchArtistInfo,
-  fetchArtistAlbums,
 };
 
 export default compose(

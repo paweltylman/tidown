@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+// filters duplicate albums from Tidal
+
 const filterAlbums = (albums) => {
   // prefer explicit
   let filteredAlbums = _.sortBy(albums, 'explicit').reverse();
