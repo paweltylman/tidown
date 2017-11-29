@@ -56,21 +56,20 @@ class ArtistAlbums extends Component {
 
 }
 
-const fbArtistAlbums = firebaseConnect([
-  {
-    path: '/albums/queue',
-    storeAs: 'queue',
-  },
-  {
-    path: '/albums/available',
-    storeAs: 'available',
-  },
-])(ArtistAlbums);
+// const fbArtistAlbums = firebaseConnect([
+//   {
+//     path: '/albums/queue',
+//     storeAs: 'queue',
+//   },
+//   {
+//     path: '/albums/available',
+//     storeAs: 'available',
+//   },
+// ])(ArtistAlbums);
 
 const mapStateToProps = state => ({
   albums: state.albums,
   available: state.firebase.data.available,
-  queue: state.firebase.data.queue,
 });
 
-export default connect(mapStateToProps, null)(fbArtistAlbums);
+export default connect(mapStateToProps, null)(ArtistAlbums);

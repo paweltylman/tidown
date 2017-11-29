@@ -9,6 +9,7 @@ import DownloadButton from './DownloadButton';
 import TrackList from './TrackList';
 
 export default ({ album, available, queued }) => (
+
   <Paper className="md-cell md-cell--12 md-grid">
 
     <section className="md-cell md-cell--3-tablet md-cell--4-desktop">
@@ -20,7 +21,7 @@ export default ({ album, available, queued }) => (
         />
       </Media>
 
-      <p className="album-header md-display-2 md-text-center">{album.artist.name}</p>
+      <p className="album-header md-display-1 md-text-center">{album.artist.name}</p>
 
       <Divider style={{ marginBottom: 20, marginTop: 20 }} />
 

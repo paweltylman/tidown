@@ -23,10 +23,6 @@ $md-secondary-color: $md-deep-orange-a-200;
   line-height: 20px;
 }
 
-.md-tile-text--primary, .md-icon-text {
-  font-size: 20px;
-}
-
 .md-floating-label {
   font-size: 15px;
 }
@@ -37,10 +33,6 @@ $md-secondary-color: $md-deep-orange-a-200;
 
 .title {
   margin-top: 20px;
-}
-
-.large-p {
-  font-size: 16px;
 }
 
 .divider-large {
@@ -54,7 +46,6 @@ $md-secondary-color: $md-deep-orange-a-200;
 .fa {
   font-size: 20px;
 }
-
 .album-align {
   margin-left: 8px;
 }
@@ -69,7 +60,7 @@ $md-secondary-color: $md-deep-orange-a-200;
 }
 
 .artist-header {
-  font-size: 64px;
+  font-size: 46px;
   line-height: 64px;
 }
 
@@ -86,4 +77,8 @@ $md-secondary-color: $md-deep-orange-a-200;
 
 .blk {
   color: black;
+}
+
+.md-tile-text--primary {
+  font-size: 18px;
 }

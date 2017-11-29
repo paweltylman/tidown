@@ -1,7 +1,9 @@
 import * as types from '../actions/types';
 
 const initialState = {
-  data: null,
+  data: {
+    albums: [],
+  },
   loading: false,
   error: false,
 };
