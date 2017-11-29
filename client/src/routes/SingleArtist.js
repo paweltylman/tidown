@@ -31,6 +31,7 @@ class SingleArtist extends Component {
 
     return (
       <div>
+
         <BackArrow />
 
         <div className="md-grid">
@@ -49,6 +50,9 @@ class SingleArtist extends Component {
         </div>
 
         <Divider />
+
+        <TrackList tracks={artist.data.topTracks} />
+
         <Albums albums={artist.data.albums} available={available} title="Albums" />
       </div>
     );

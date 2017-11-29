@@ -15,18 +15,12 @@ const format = async (album) => {
       lastDownload: now,
       albums: {
         ...artist.albums,
-        [album.id]: {
-          id: album.id,
-          title: album.title,
-          cover: album.cover,
-          path: album.path,
-          downloaded: now,
-        },
+        [album.id]: album,
       },
     };
   }
 
-  const newArtist = album.artist;
+  const newArtist = await tidown.getArtist(album.artist.id);
 
   if (newArtist.picture) {
     newArtist.picture = tidown.artistPicToUrl(newArtist.picture);
@@ -45,13 +39,7 @@ const format = async (album) => {
     picture: newArtist.picture,
     lastDownload: now,
     albums: {
-      [album.id]: {
-        id: album.id,
-        title: album.title,
-        cover: album.cover,
-        path: album.path,
-        downloaded: now,
-      },
+      [album.id]: album,
     },
   };
 

@@ -14,7 +14,7 @@ const viewItems = [{
 export default class Albums extends Component {
 
   state = {
-    view: viewItems[0],
+    view: this.props.view === 'simple' ? viewItems[1] : viewItems[0],
   }
 
   handleSelect = (value, index) => {
@@ -42,11 +42,12 @@ export default class Albums extends Component {
             fullWidth
             centered
             onChange={this.handleSelect}
-            placeholder="Expanded View"
+            placeholder="Album View"
           />
         </div>
         {
           albums.map((album) => {
+
             const isAvailable = available && available.hasOwnProperty(album.id);
 
             if (this.state.view.value === 'simple') {
@@ -54,7 +55,11 @@ export default class Albums extends Component {
                 <SimpleAlbum
                   album={album}
                   key={album.id}
-                  path={isAvailable ? available[album.id].path : null}
+                  path={
+                    isAvailable ? available[album.id].path
+                      : album.path ? album.path
+                        : null
+                  }
                 />
               );
             }

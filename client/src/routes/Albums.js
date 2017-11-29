@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import sortRecentAlbums from '../helpers/sortRecentAlbums';
 import AlbumSearch from '../containers/AlbumSearch';
-import RecentAlbums from '../containers/RecentAlbums';
+import Albums from '../components/Albums';
 
-const Album = ({ albums }) => (
+const AlbumPage = ({ recentArtists, albums }) => (
   <div>
 
     <div className="md-grid">
@@ -11,15 +13,30 @@ const Album = ({ albums }) => (
         <AlbumSearch />
       </div>
     </div>
-
-    <div>
-      <RecentAlbums />
-    </div>
+    {
+        isLoaded(recentArtists) && !isEmpty(recentArtists) ? (
+          <div>
+            <Albums
+              albums={sortRecentAlbums(recentArtists)}
+              view="simple"
+              title="Recently Added"
+            />
+          </div>
+        ) : null
+      }
   </div>
 );
 
+const fbAlbumPage = firebaseConnect([
+  {
+    path: '/artists',
+    storeAs: 'recentArtists',
+    queryParams: ['orderByChild=lastDownload', 'limitToLast=20'],
+  },
+])(AlbumPage);
+
 const mapStateToProps = state => ({
-  albums: state.albums,
+  recentArtists: state.firebase.ordered.recentArtists,
 });
 
-export default connect(mapStateToProps, null)(Album);
+export default connect(mapStateToProps, null)(fbAlbumPage);
