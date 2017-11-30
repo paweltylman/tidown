@@ -59,6 +59,7 @@ export default class Albums extends Component {
                   key={album.id}
                   available={album.available}
                   path={album.path}
+                  update={this.props.update}
                 />
               );
             }
@@ -68,6 +69,7 @@ export default class Albums extends Component {
                   key={album.id}
                   available={album.available}
                   path={album.path}
+                  update={this.props.update}
                 />
               );
 

@@ -14,6 +14,7 @@ export default class PlexButton extends Component {
     this.setState({ downloading: true });
 
     try {
+
       const res = await api({
         method: 'POST',
         url: '/plex/album',
@@ -22,7 +23,6 @@ export default class PlexButton extends Component {
         },
       });
 
-      return res.data.album;
     } catch (e) {
 
       this.setState({
@@ -30,15 +30,16 @@ export default class PlexButton extends Component {
         downloading: false,
       });
 
-      return null;
     }
+
+    this.props.update();
   }
 
   render() {
 
     const { album } = this.props;
 
-    if (album.available) {
+    if (album.path) {
       return (<Button disabled text="Available On Plex" />);
     } else if (this.state.downloading) {
       return (<Button disabled text="Adding To Plex" />);

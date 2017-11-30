@@ -10,9 +10,12 @@ import TrackList from '../components/TrackList';
 class SingleArtist extends Component {
 
   componentDidMount() {
-
     const { id } = this.props.match.params;
+    this.props.fetchArtistInfo(id);
+  }
 
+  update = () => {
+    const { id } = this.props.match.params;
     this.props.fetchArtistInfo(id);
   }
 
@@ -20,7 +23,7 @@ class SingleArtist extends Component {
 
     const { artist, available } = this.props;
 
-    if (artist.loading || !artist.data.name) {
+    if (!artist.data.name) {
       return (
         <Spinner />
       );
@@ -54,6 +57,7 @@ class SingleArtist extends Component {
           albums={artist.data.albums}
           title="Albums"
           showViewToggle
+          update={this.update}
         />
       </div>
     );

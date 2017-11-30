@@ -8,7 +8,11 @@ import Spinner from '../components/Spinner';
 class SingleAlbum extends Component {
 
   componentWillMount() {
+    const { id } = this.props.match.params;
+    this.props.fetchAlbum(id);
+  }
 
+  update = () => {
     const { id } = this.props.match.params;
     this.props.fetchAlbum(id);
   }
@@ -17,7 +21,7 @@ class SingleAlbum extends Component {
 
     const { albums } = this.props;
 
-    if (albums.loading || !albums.data.length > 0) {
+    if (!albums.data.length > 0) {
       return (
         <Spinner />
       );
@@ -31,6 +35,7 @@ class SingleAlbum extends Component {
         <Albums
           albums={albums.data}
           title={albums.data[0].title}
+          update={this.update}
         />
 
       </div>

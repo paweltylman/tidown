@@ -1,6 +1,7 @@
 import Tidal from 'tidal-api-wrapper';
 import axios from 'axios';
 import _ from 'lodash';
+import { fb } from '../store';
 import * as types from './types';
 
 const tidal = new Tidal();
@@ -36,7 +37,7 @@ const fetchNewAlbums = () => async (dispatch) => {
       },
     });
 
-    const tabs = res.data.rows[0].modules[0].tabs;
+    const { tabs } = res.data.rows[0].modules[0];
 
     const newAlbums = _.find(tabs, tab => tab.title === 'New').pagedList.items;
     const staffPicks = _.find(tabs, tab => tab.title === 'Staff Picks').pagedList.items;
@@ -49,14 +50,24 @@ const fetchNewAlbums = () => async (dispatch) => {
     };
 
     Object.keys(albums).forEach((property) => {
+
       albums[property].forEach(async (album) => {
+
         album.cover = tidal.albumArtToUrl(album.cover);
+
         // check if the album exists in the database
         const fbAlbum = await fb.database().ref(`/artists/${album.artist.id}/albums/${album.id}`);
-        if (fbAlbum) {
-          album.available = true;
+
+        if (fbAlbum.val()) {
+
+          album.path = fbAlbum.val().path;
+          album.tracks = fbAlbum.val().tracks;
+
         } else {
-          album.available = false;
+
+          const tracks = await tidal.getAlbumTracks(album.id);
+          album.tracks = tracks;
+
         }
       });
     });

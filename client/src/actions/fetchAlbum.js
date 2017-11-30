@@ -30,18 +30,16 @@ const fetchAlbum = id => async (dispatch) => {
 
     if (fbAlbum.val()) {
 
-      album.available = true;
-      album.tracks = fbAlbum.val().tracks;
       album.path = fbAlbum.val().path;
+      album.tracks = fbAlbum.val().tracks;
 
     } else {
 
       const tracks = await tidal.getAlbumTracks(id);
-      album.available = false;
       album.tracks = tracks;
 
     }
-    console.log(album);
+
     album.cover = tidal.albumArtToUrl(album.cover);
 
     dispatch(receiveAlbum(album));

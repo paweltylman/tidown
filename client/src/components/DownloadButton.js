@@ -14,7 +14,7 @@ export default class DownloadButton extends Component {
     const { album } = this.props;
     let { path } = album;
 
-    if (!album.available) {
+    if (!path) {
 
       try {
 

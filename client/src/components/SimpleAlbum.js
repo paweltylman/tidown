@@ -42,6 +42,8 @@ export default class SimpleAlbum extends Component {
           downloading: false,
         });
       }
+
+      this.props.update();
     }
 
   }

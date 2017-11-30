@@ -36,20 +36,22 @@ const fetchArtistInfo = id => async (dispatch) => {
 
     // concat artist albums and eps and remove artist singles
     let allAlbums = albums.concat(eps.filter(album => album.type !== 'SINGLE'));
+
     // append more info to each album
     allAlbums = await Promise.map(filterAlbums(allAlbums), async (album) => {
+
       // check if the album exists in the database to see if it has already been downloaded
       const fbAlbum = await fb.database().ref(`/artists/${id}/albums/${album.id}`).once('value');
+
       // if the album exists in the database append some extra info
       if (fbAlbum.val()) {
 
-        album.available = true;
         album.path = fbAlbum.val().path;
         album.tracks = fbAlbum.val().tracks;
 
       } else {
+
         // if the album doesn't exist fetch it's tracks from Tidal
-        album.available = false;
         const tracks = await tidal.getAlbumTracks(album.id);
         album.tracks = tracks;
 
