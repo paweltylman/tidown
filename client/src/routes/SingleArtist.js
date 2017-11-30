@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Avatar, Divider, SelectField } from 'react-md';
+import { Avatar, Divider } from 'react-md';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import BackArrow from '../components/BackArrow';
 import Albums from '../components/Albums';
