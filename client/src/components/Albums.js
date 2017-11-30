@@ -25,7 +25,7 @@ export default class Albums extends Component {
 
   render() {
 
-    const { albums, available } = this.props;
+    const { albums } = this.props;
 
     return (
       <div className="md-grid" style={{ marginTop: 40 }}>
@@ -52,18 +52,13 @@ export default class Albums extends Component {
         {
           albums.map((album) => {
 
-            const isAvailable = available && available.hasOwnProperty(album.id);
-
             if (this.state.view.value === 'simple') {
               return (
                 <SimpleAlbum
                   album={album}
                   key={album.id}
-                  path={
-                    isAvailable ? available[album.id].path
-                      : album.path ? album.path
-                        : null
-                  }
+                  available={album.available}
+                  path={album.path}
                 />
               );
             }
@@ -71,7 +66,8 @@ export default class Albums extends Component {
                 <Album
                   album={album}
                   key={album.id}
-                  path={isAvailable ? available[album.id].path : null}
+                  available={album.available}
+                  path={album.path}
                 />
               );
 

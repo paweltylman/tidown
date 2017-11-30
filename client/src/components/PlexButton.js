@@ -36,9 +36,9 @@ export default class PlexButton extends Component {
 
   render() {
 
-    const { path } = this.props;
+    const { album } = this.props;
 
-    if (path) {
+    if (album.available) {
       return (<Button disabled text="Available On Plex" />);
     } else if (this.state.downloading) {
       return (<Button disabled text="Adding To Plex" />);

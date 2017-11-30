@@ -8,7 +8,7 @@ import PlexButton from './PlexButton';
 import DownloadButton from './DownloadButton';
 import TrackList from './TrackList';
 
-export default ({ album, path }) => (
+export default ({ album }) => (
 
   <Paper className="md-cell md-cell--12 md-grid">
 
@@ -32,11 +32,11 @@ export default ({ album, path }) => (
 
       <div className="md-grid">
         <div className="md-cell--12 download">
-          <PlexButton path={path} album={album} />
+          <PlexButton album={album} />
         </div>
 
         <div className="md-cell--12 download">
-          <DownloadButton path={path} album={album} />
+          <DownloadButton album={album} />
         </div>
       </div>
 

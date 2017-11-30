@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Button from './RaisedButton';
 import api from '../helpers/api';
 
-const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4321';
-
 export default class DownloadButton extends Component {
 
   state = {
@@ -13,10 +11,10 @@ export default class DownloadButton extends Component {
 
   downloadLocal = async () => {
 
-    let { path } = this.props;
     const { album } = this.props;
+    let { path } = album;
 
-    if (!path) {
+    if (!album.available) {
 
       try {
 
@@ -42,7 +40,7 @@ export default class DownloadButton extends Component {
     }
 
     const params = `path=${path}&artist=${album.artist.name}&album=${album.title}`;
-    const url = `${baseURL}/download/album/?${params}`;
+    const url = `/download/album/?${params}`;
 
     // create link and download zip
     const a = document.createElement('a');

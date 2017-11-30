@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firebaseConnect } from 'react-redux-firebase';
 import { Avatar, Divider } from 'react-md';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import BackArrow from '../components/BackArrow';
@@ -54,7 +52,6 @@ class SingleArtist extends Component {
 
         <Albums
           albums={artist.data.albums}
-          available={available}
           title="Albums"
           showViewToggle
         />
@@ -66,20 +63,10 @@ class SingleArtist extends Component {
 
 const mapStateToProps = state => ({
   artist: state.artist,
-  albums: state.albums,
-  available: state.firebase.data.available,
 });
 
 const mapDispatchToProps = {
   fetchArtistInfo,
 };
 
-export default compose(
-  firebaseConnect((props, store) => [
-    {
-      storeAs: 'available',
-      path: `/artists/${props.match.params.id}/albums`,
-    },
-  ]),
-  connect(mapStateToProps, mapDispatchToProps),
-)(SingleArtist);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleArtist);

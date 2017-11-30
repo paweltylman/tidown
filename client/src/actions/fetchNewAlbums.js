@@ -49,8 +49,15 @@ const fetchNewAlbums = () => async (dispatch) => {
     };
 
     Object.keys(albums).forEach((property) => {
-      albums[property].forEach((album) => {
+      albums[property].forEach(async (album) => {
         album.cover = tidal.albumArtToUrl(album.cover);
+        // check if the album exists in the database
+        const fbAlbum = await fb.database().ref(`/artists/${album.artist.id}/albums/${album.id}`);
+        if (fbAlbum) {
+          album.available = true;
+        } else {
+          album.available = false;
+        }
       });
     });
 

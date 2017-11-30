@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { FontIcon } from 'react-md';
 import api from '../helpers/api';
 
-const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4321';
-
 export default class SimpleDownloadButton extends Component {
 
   state = {
@@ -15,30 +13,35 @@ export default class SimpleDownloadButton extends Component {
 
     this.setState({ processing: true });
 
-    try {
+    let { path } = track;
 
-      const res = await api({
-        method: 'POST',
-        url: '/download/track',
-        data: {
-          id: track.id,
-        },
-      });
+    if (!path) {
 
-      track = res.data;
+      try {
+
+        const res = await api({
+          method: 'POST',
+          url: '/download/track',
+          data: {
+            id: track.id,
+          },
+        });
+
+        path = res.data;
 
 
-    } catch (e) {
+      } catch (e) {
 
-      this.setState({
-        processing: false,
-        error: true,
-      });
+        this.setState({
+          processing: false,
+          error: true,
+        });
 
+      }
     }
 
     const a = document.createElement('a');
-    a.href = `${baseURL}/download/track?path=${track.path}`;
+    a.href = `/download/track?path=${track.path}`;
     a.download = '';
     document.body.appendChild(a);
     a.click();
