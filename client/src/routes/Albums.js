@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import AlbumSearch from '../containers/AlbumSearch';
-import Albums from '../components/Albums';
+import RecentAlbums from '../containers/RecentAlbums';
 
-const AlbumPage = ({ recentArtists }) => (
+const Albums = () => (
 
   <div>
 
@@ -13,30 +11,10 @@ const AlbumPage = ({ recentArtists }) => (
         <AlbumSearch />
       </div>
     </div>
-    {
-        isLoaded(recentArtists) && !isEmpty(recentArtists) ? (
-          <div>
-            <Albums
-              view="simple"
-              title="Recently Added"
-              showViewToggle
-            />
-          </div>
-        ) : null
-      }
+
+    <RecentAlbums />
+
   </div>
 );
 
-const fbAlbumPage = firebaseConnect([
-  {
-    path: '/artists',
-    storeAs: 'recentArtists',
-    queryParams: ['orderByChild=lastDownload', 'limitToLast=20'],
-  },
-])(AlbumPage);
-
-const mapStateToProps = state => ({
-  recentArtists: state.firebase.ordered.recentArtists,
-});
-
-export default connect(mapStateToProps, null)(fbAlbumPage);
+export default Albums;

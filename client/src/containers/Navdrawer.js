@@ -12,12 +12,12 @@ const navItems = [
     leftIcon: <FontIcon>person</FontIcon>,
     path: '/artists',
   },
-  // {
-  //   key: 'album',
-  //   primaryText: 'Albums',
-  //   leftIcon: <FontIcon>album</FontIcon>,
-  //   path: '/albums',
-  // },
+  {
+    key: 'album',
+    primaryText: 'Albums',
+    leftIcon: <FontIcon>album</FontIcon>,
+    path: '/albums',
+  },
   // {
   //   key: 'releases',
   //   primaryText: 'New Releases',

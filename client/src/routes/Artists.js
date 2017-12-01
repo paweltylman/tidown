@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ArtistSearch from '../containers/ArtistSearch';
 import RecentArtists from '../containers/RecentArtists';
 
 
-const Artist = ({ albums }) => (
+const Artists = () => (
   <div>
 
     <div className="md-grid">
@@ -17,8 +16,4 @@ const Artist = ({ albums }) => (
   </div>
 );
 
-const mapStateToProps = state => ({
-  albums: state.albums,
-});
-
-export default connect(mapStateToProps)(Artist);
+export default Artists;
