@@ -20,7 +20,7 @@ const RecentArtists = ({ recentAlbums }) => {
     <div>
 
       <Albums
-        albums={albums}
+        albums={albums.reverse()}
         title="Recently Added"
         view="simple"
         showViewToggle
