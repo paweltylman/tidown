@@ -9,8 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 import api from '../helpers/api';
 
-const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4321';
-
 export default class SimpleAlbum extends Component {
 
   state = {
@@ -73,7 +71,7 @@ export default class SimpleAlbum extends Component {
         this.setState({ processing: false });
       } catch (e) {
 
-        this.setState({ processing: false, error: true });
+        this.setState({ processing: false, downloadError: true });
 
       }
 
