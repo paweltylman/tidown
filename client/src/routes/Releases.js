@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import { SelectField } from 'react-md';
 import fetchNewAlbums from '../actions/fetchNewAlbums';
 import Albums from '../components/Albums';
@@ -34,9 +35,9 @@ class Releases extends Component {
 
   render() {
 
-    const { albums } = this.props;
+    const { albums, availableAlbums } = this.props;
 
-    if (!albums.data.newAlbums.length > 0) {
+    if (!albums.data.newAlbums.length > 0 || !isLoaded(availableAlbums)) {
       return (
         <Spinner />
       );
@@ -63,7 +64,7 @@ class Releases extends Component {
 
         <Albums
           albums={albums.data[this.state.view.value]}
-          update={this.update}
+          availableAlbums={availableAlbums}
           view="simple"
         />
       </div>
@@ -71,13 +72,21 @@ class Releases extends Component {
   }
 }
 
+const fbReleases = firebaseConnect([
+  {
+    path: '/albums',
+    storeAs: 'availableAlbums',
+  },
+])(Releases);
+
 const mapStateToProps = state => ({
   albums: state.newAlbums,
+  availableAlbums: state.firebase.data.availableAlbums,
 });
 
 const mapDispatchToProps = {
   fetchNewAlbums,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Releases);
+export default connect(mapStateToProps, mapDispatchToProps)(fbReleases);
 

@@ -43,7 +43,6 @@ export default class SimpleAlbum extends Component {
         });
       }
 
-      this.props.update();
     }
 
   }
@@ -93,7 +92,7 @@ export default class SimpleAlbum extends Component {
 
   render() {
 
-    const { album, path } = this.props;
+    const { album } = this.props;
 
     return (
       <div className="md-cell">
@@ -107,7 +106,7 @@ export default class SimpleAlbum extends Component {
                 <Button
                   className="md-cell--right"
                   tooltipLabel={
-                    path ? 'Available On Plex' :
+                    album.path ? 'Available On Plex' :
                       this.state.downloading ? 'Adding To Plex' :
                         this.state.plexError ? 'Error' :
                         'Add To Plex'
@@ -115,7 +114,7 @@ export default class SimpleAlbum extends Component {
                   tooltipPosition="top"
                   icon
                   iconClassName={
-                    path ? (
+                    album.path ? (
                       'fa fa-check'
                     ) : this.state.downloading ? (
                       'fa fa-spinner fa-pulse'
