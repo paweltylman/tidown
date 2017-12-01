@@ -1,7 +1,6 @@
 import Tidal from 'tidal-api-wrapper';
 import Promise from 'bluebird';
 import filterAlbums from '../helpers/filterAlbums';
-import { fb } from '../store';
 import * as types from './types';
 
 const tidal = new Tidal();
@@ -72,7 +71,6 @@ const fetchArtistInfo = id => async (dispatch) => {
     dispatch(receiveArtistInfo(data));
 
   } catch (e) {
-    console.log(e);
     dispatch(errorArtistInfo());
   }
 };

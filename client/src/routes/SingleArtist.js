@@ -25,7 +25,7 @@ class SingleArtist extends Component {
 
     const { artist, availableAlbums } = this.props;
 
-    if (!artist.data.name || !isLoaded(availableAlbums)) {
+    if (!artist.data.name || artist.loading || !isLoaded(availableAlbums)) {
       return (
         <Spinner />
       );

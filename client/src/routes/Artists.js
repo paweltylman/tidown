@@ -13,6 +13,7 @@ const Artist = ({ albums }) => (
       </div>
     </div>
 
+    <RecentArtists />
   </div>
 );
 
@@ -20,4 +21,4 @@ const mapStateToProps = state => ({
   albums: state.albums,
 });
 
-export default connect(mapStateToProps, null)(Artist);
+export default connect(mapStateToProps)(Artist);

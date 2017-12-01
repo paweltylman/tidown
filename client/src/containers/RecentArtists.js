@@ -25,10 +25,10 @@ const RecentArtists = ({ recentArtists }) => {
       </div>
       <div className="md-grid">
         {
-        recentArtists.reverse().map(artist => (
-          <ArtistCard artist={artist.value} key={artist.value.id} />
-        ))
-      }
+          recentArtists.reverse().map(artist => (
+            <ArtistCard artist={artist.value} key={artist.value.id} />
+          ))
+        }
       </div>
     </div>
   );
@@ -46,4 +46,4 @@ const mapStateToProps = state => ({
   recentArtists: state.firebase.ordered.recentArtists,
 });
 
-export default connect(mapStateToProps, null)(fbRecentArtists);
+export default connect(mapStateToProps)(fbRecentArtists);
