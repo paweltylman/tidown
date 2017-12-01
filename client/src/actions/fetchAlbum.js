@@ -1,5 +1,4 @@
 import Tidal from 'tidal-api-wrapper';
-import { fb } from '../store';
 import * as types from './types';
 
 const tidal = new Tidal();
@@ -25,20 +24,8 @@ const fetchAlbum = id => async (dispatch) => {
   try {
 
     const album = await tidal.getAlbum(id);
-
-    const fbAlbum = await fb.database().ref(`/artists/${album.artist.id}/albums/${album.id}`).once('value');
-
-    if (fbAlbum.val()) {
-
-      album.path = fbAlbum.val().path;
-      album.tracks = fbAlbum.val().tracks;
-
-    } else {
-
-      const tracks = await tidal.getAlbumTracks(id);
-      album.tracks = tracks;
-
-    }
+    const tracks = await tidal.getAlbumTracks(id);
+    album.tracks = tracks;
 
     album.cover = tidal.albumArtToUrl(album.cover);
 

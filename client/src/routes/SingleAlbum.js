@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import fetchAlbum from '../actions/fetchAlbum';
 import BackArrow from '../components/BackArrow';
 import Albums from '../components/Albums';
 import Spinner from '../components/Spinner';
+
+// this is a crappy hack but helps limit the amount of data coming back from firebase
+const transformAvailable = (availableAlbums) => {
+
+  if (availableAlbums) {
+    return {
+      [availableAlbums.id]: availableAlbums,
+    };
+  }
+  return {};
+
+};
 
 class SingleAlbum extends Component {
 
@@ -12,14 +26,9 @@ class SingleAlbum extends Component {
     this.props.fetchAlbum(id);
   }
 
-  update = () => {
-    const { id } = this.props.match.params;
-    this.props.fetchAlbum(id);
-  }
-
   render() {
 
-    const { albums } = this.props;
+    const { albums, availableAlbums, queuedAlbums } = this.props;
 
     if (albums.loading || !albums.data.length > 0) {
       return (
@@ -34,8 +43,8 @@ class SingleAlbum extends Component {
 
         <Albums
           albums={albums.data}
-          title={albums.data[0].title}
-          update={this.update}
+          availableAlbums={transformAvailable(availableAlbums)}
+          queuedAlbums={queuedAlbums}
         />
 
       </div>
@@ -43,12 +52,26 @@ class SingleAlbum extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  albums: state.albums,
+  availableAlbums: state.firebase.data.availableAlbums,
+  queuedAlbums: state.firebase.data.queuedAlbums,
+});
+
 const mapDispatchToProps = {
   fetchAlbum,
 };
 
-const mapStateToProps = state => ({
-  albums: state.albums,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleAlbum);
+export default compose(
+  firebaseConnect((props, store) => [
+    {
+      path: `/albums/${props.match.params.id}`,
+      storeAs: 'availableAlbums',
+    },
+    {
+      path: '/queue',
+      storeAs: 'queuedAlbums',
+    },
+  ]),
+  connect(mapStateToProps, mapDispatchToProps),
+)(SingleAlbum);

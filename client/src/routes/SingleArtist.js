@@ -59,7 +59,6 @@ class SingleArtist extends Component {
           albums={artist.data.albums}
           title="Albums"
           showViewToggle
-          update={this.update}
           availableAlbums={availableAlbums}
           queuedAlbums={queuedAlbums}
         />
