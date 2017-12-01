@@ -13,9 +13,7 @@ export default class SimpleDownloadButton extends Component {
 
     this.setState({ processing: true });
 
-    let { path } = track;
-
-    if (!path) {
+    if (!track.path) {
 
       try {
 
@@ -27,7 +25,7 @@ export default class SimpleDownloadButton extends Component {
           },
         });
 
-        path = res.data;
+       track = res.data; // eslint-disable-line
 
 
       } catch (e) {
