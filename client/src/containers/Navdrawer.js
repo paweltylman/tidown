@@ -15,6 +15,11 @@ const navItems = [{
   primaryText: 'Albums',
   leftIcon: <FontIcon>album</FontIcon>,
   path: '/albums',
+}, {
+  key: 'releases',
+  primaryText: 'New Releases',
+  leftIcon: <FontIcon>library_music</FontIcon>,
+  path: '/releases',
 }];
 
 class Navdrawer extends Component {

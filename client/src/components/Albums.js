@@ -26,7 +26,7 @@ export default class Albums extends Component {
   render() {
 
     const { albums } = this.props;
-
+    console.log(albums);
     return (
       <div className="md-grid" style={{ marginTop: 40 }}>
         <h1
@@ -47,7 +47,9 @@ export default class Albums extends Component {
                 placeholder="Album View"
               />
             </div>
-          ) : null
+          ) : (
+            <div className="md-cell--4-desktop md-cell--3-tablet md-cell--4-phone album-align md-cell--middle" />
+          )
         }
         {
           albums.map((album) => {

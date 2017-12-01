@@ -11,7 +11,7 @@ const sortRecentAlbums = (recentArtists) => {
     Object.keys(albums).forEach(key => recentAlbums.push(albums[key]));
   });
 
-  recentAlbums = _.sortBy(recentAlbums, 'downloaded');
+  recentAlbums = _.sortBy(recentAlbums, 'downloaded').reverse();
   recentAlbums = recentAlbums.splice(0, 20);
   return recentAlbums;
 };

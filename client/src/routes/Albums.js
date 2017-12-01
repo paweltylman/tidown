@@ -5,7 +5,8 @@ import sortRecentAlbums from '../helpers/sortRecentAlbums';
 import AlbumSearch from '../containers/AlbumSearch';
 import Albums from '../components/Albums';
 
-const AlbumPage = ({ recentArtists, albums }) => (
+const AlbumPage = ({ recentArtists }) => (
+
   <div>
 
     <div className="md-grid">

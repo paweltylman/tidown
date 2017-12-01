@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { SelectField } from 'react-md';
-import NewReleases from '../containers/NewReleases';
+import fetchNewAlbums from '../actions/fetchNewAlbums';
+import Albums from '../components/Albums';
+import Spinner from '../components/Spinner';
 
 const viewItems = [{
   label: 'New Releases',
@@ -13,10 +16,14 @@ const viewItems = [{
   value: 'topAlbums',
 }];
 
-export default class Releases extends Component {
+class Releases extends Component {
 
   state = {
     view: viewItems[0],
+  }
+
+  componentDidMount() {
+    this.props.fetchNewAlbums();
   }
 
   handleSelect = (value, index) => {
@@ -26,6 +33,15 @@ export default class Releases extends Component {
   }
 
   render() {
+
+    const { albums } = this.props;
+
+    if (!albums.data.newAlbums.length > 0) {
+      return (
+        <Spinner />
+      );
+    }
+
     return (
       <div style={{ marginTop: 40 }}>
         <div className="md-grid">
@@ -44,12 +60,24 @@ export default class Releases extends Component {
             />
           </div>
         </div>
-        <div className="md-grid">
-          <NewReleases
-            view={this.state.view}
-          />
-        </div>
+
+        <Albums
+          albums={albums.data[this.state.view.value]}
+          update={this.update}
+          view="simple"
+        />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  albums: state.newAlbums,
+});
+
+const mapDispatchToProps = {
+  fetchNewAlbums,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Releases);
+

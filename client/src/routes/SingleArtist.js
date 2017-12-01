@@ -21,7 +21,7 @@ class SingleArtist extends Component {
 
   render() {
 
-    const { artist, available } = this.props;
+    const { artist } = this.props;
 
     if (!artist.data.name) {
       return (

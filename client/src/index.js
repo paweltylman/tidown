@@ -16,6 +16,8 @@ WebFontLoader.load({
 
 history.listen((location) => {
   window.scrollTo(0, 0);
+  store.dispatch({ type: 'CLEAR_ALBUMS' });
+  store.dispatch({ type: 'CLEAR_ARTIST' });
 });
 
 ReactDOM.render(

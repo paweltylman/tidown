@@ -27,6 +27,8 @@ const artist = (state = initialState, action) => {
         ...state,
         error: true,
       };
+    case types.CLEAR_ARTIST:
+      return initialState;
     default:
       return state;
   }

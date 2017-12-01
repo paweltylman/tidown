@@ -15,7 +15,7 @@ export default class PlexButton extends Component {
 
     try {
 
-      const res = await api({
+      await api({
         method: 'POST',
         url: '/plex/album',
         data: {

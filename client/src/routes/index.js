@@ -4,6 +4,7 @@ import Navdrawer from '../containers/Navdrawer';
 import Home from './Home';
 import Artists from './Artists';
 import Albums from './Albums';
+import Releases from './Releases';
 import SingleArtist from './SingleArtist';
 import SingleAlbum from './SingleAlbum';
 
@@ -24,6 +25,11 @@ export default () => (
         exact
         path="/albums"
         component={Albums}
+      />
+      <Route
+        exact
+        path="/releases"
+        component={Releases}
       />
       <Route
         exact

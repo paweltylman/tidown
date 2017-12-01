@@ -54,9 +54,9 @@ const fetchNewAlbums = () => async (dispatch) => {
       albums[property].forEach(async (album) => {
 
         album.cover = tidal.albumArtToUrl(album.cover);
-
+        album.artist = album.artists[0];
         // check if the album exists in the database
-        const fbAlbum = await fb.database().ref(`/artists/${album.artist.id}/albums/${album.id}`);
+        const fbAlbum = await fb.database().ref(`/artists/${album.artist.id}/albums/${album.id}`).once('value');
 
         if (fbAlbum.val()) {
 
