@@ -35,7 +35,7 @@ class Releases extends Component {
 
   render() {
 
-    const { albums, availableAlbums } = this.props;
+    const { albums, availableAlbums, queuedAlbums } = this.props;
 
     if (!albums.data.newAlbums.length > 0 || !isLoaded(availableAlbums)) {
       return (
@@ -65,6 +65,7 @@ class Releases extends Component {
         <Albums
           albums={albums.data[this.state.view.value]}
           availableAlbums={availableAlbums}
+          queuedAlbums={queuedAlbums}
           view="simple"
         />
       </div>
@@ -77,11 +78,16 @@ const fbReleases = firebaseConnect([
     path: '/albums',
     storeAs: 'availableAlbums',
   },
+  {
+    path: '/queue',
+    storeAs: 'queuedAlbums',
+  },
 ])(Releases);
 
 const mapStateToProps = state => ({
   albums: state.newAlbums,
   availableAlbums: state.firebase.data.availableAlbums,
+  queuedAlbums: state.firebase.data.queuedAlbums,
 });
 
 const mapDispatchToProps = {
