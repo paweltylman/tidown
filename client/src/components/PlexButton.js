@@ -32,7 +32,6 @@ export default class PlexButton extends Component {
 
     }
 
-    this.props.update();
   }
 
   render() {

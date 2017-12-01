@@ -22,7 +22,9 @@ export default class SimpleAlbum extends Component {
 
   addToPlex = async () => {
 
-    if (!this.props.path) {
+    const { album } = this.props;
+
+    if (!album.path && !this.state.downloading) {
       this.setState({ downloading: true });
 
       try {
@@ -49,8 +51,8 @@ export default class SimpleAlbum extends Component {
 
   downloadLocal = async () => {
 
-    let { path } = this.props;
     const { album } = this.props;
+    let { path } = album;
 
     if (!path) {
 
@@ -66,21 +68,21 @@ export default class SimpleAlbum extends Component {
           },
         });
 
-        path = res.data.path; // eslint-disable-line prefer-destructuring
+        path = res.data.album.path; // eslint-disable-line prefer-destructuring
 
         this.setState({ processing: false });
       } catch (e) {
 
-        this.setState({ processing: false, downloadError: true });
+        this.setState({ processing: false, error: true });
 
       }
 
     }
 
     const params = `path=${path}&artist=${album.artist.name}&album=${album.title}`;
-    const url = `${baseURL}/download/album/?${params}`;
+    const url = `/download/album/?${params}`;
 
-    // create link and download
+    // create link and download zip
     const a = document.createElement('a');
     a.href = url;
     a.download = '';
