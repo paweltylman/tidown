@@ -22,7 +22,10 @@ const saveToDatabase = async (album) => {
         lastDownload: now,
         albums: {
           ...fbArtist.val().albums,
-          [album.id]: album,
+          [album.id]: {
+            ...album,
+            downloaded: now,
+          },
         },
       };
     } else {
@@ -30,7 +33,10 @@ const saveToDatabase = async (album) => {
         ...album.artist,
         lastDownload: now,
         albums: {
-          [album.id]: album,
+          [album.id]: {
+            ...album,
+            downloaded: now,
+          },
         },
       };
     }
