@@ -95,7 +95,7 @@ export default class SimpleAlbum extends Component {
     const { album } = this.props;
 
     return (
-      <div className="md-cell">
+      <div className="md-cell md-cell--3-desktop">
         <Card>
           <Media aspectRatio="1-1">
             <Link to={`/album/${album.id}`}>
