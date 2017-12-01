@@ -183,7 +183,7 @@ class Tidown extends Tidal {
   */
   writeTrack(stream, meta, fullPath) {
     return new Promise((resolve, reject) => {
-    // set double digit track number
+      // set double digit track number
       const trackNum = meta.trackNumber < 10 ? `0${meta.trackNumber}` : meta.trackNumber;
 
       const filename = `${trackNum}. ${sanitize(meta.title)}.${meta.codec}`;
@@ -319,8 +319,19 @@ class Tidown extends Tidal {
     try {
       // most of these methods are inherited from tidal-api-wrapper
       const album = await this.getAlbum(id);
-
       const tracks = await this.getAlbumTracks(id);
+
+      const artist = await this.getArtist(album.artist.id);
+      if (artist.picture) {
+        artist.picture = this.artistPicToUrl(artist.picture);
+      } else {
+        // if the artist does not have a picture use Tidal's stock artist picture
+        artist.picture = {
+          sm: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+          md: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+          lg: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
+        };
+      }
 
       let albumPath;
 
@@ -349,16 +360,16 @@ class Tidown extends Tidal {
         };
       });
 
-      // return album and track info for database purposes
+        // return album and track info for database purposes
       return {
         ...album,
+        artist,
         path: albumPath,
-        tracks: {
-          ...tracksWithPaths,
-        },
+        tracks: tracksWithPaths,
       };
 
     } catch (e) {
+      console.log(e);
       throw e;
     }
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import sortRecentAlbums from '../helpers/sortRecentAlbums';
 import AlbumSearch from '../containers/AlbumSearch';
 import Albums from '../components/Albums';
 
@@ -18,7 +17,6 @@ const AlbumPage = ({ recentArtists }) => (
         isLoaded(recentArtists) && !isEmpty(recentArtists) ? (
           <div>
             <Albums
-              albums={sortRecentAlbums(recentArtists)}
               view="simple"
               title="Recently Added"
               showViewToggle

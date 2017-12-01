@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import { Avatar, Divider } from 'react-md';
 import fetchArtistInfo from '../actions/fetchArtistInfo';
 import BackArrow from '../components/BackArrow';
@@ -21,9 +23,9 @@ class SingleArtist extends Component {
 
   render() {
 
-    const { artist } = this.props;
+    const { artist, availableAlbums } = this.props;
 
-    if (!artist.data.name) {
+    if (!artist.data.name || !isLoaded(availableAlbums)) {
       return (
         <Spinner />
       );
@@ -58,6 +60,7 @@ class SingleArtist extends Component {
           title="Albums"
           showViewToggle
           update={this.update}
+          availableAlbums={availableAlbums}
         />
       </div>
     );
@@ -67,10 +70,20 @@ class SingleArtist extends Component {
 
 const mapStateToProps = state => ({
   artist: state.artist,
+  availableAlbums: state.firebase.data.availableAlbums,
 });
 
 const mapDispatchToProps = {
   fetchArtistInfo,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleArtist);
+export default compose(
+  firebaseConnect((props, store) => [
+    {
+      path: `/artists/${props.match.params.id}/albums`,
+      storeAs: 'availableAlbums',
+    },
+  ]),
+  connect(mapStateToProps, mapDispatchToProps),
+)(SingleArtist);
+

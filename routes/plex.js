@@ -1,7 +1,7 @@
 import express from 'express';
 import Promise from 'bluebird';
 import { tidown, fb } from '../app';
-import format from '../helpers/format';
+import saveToDatabase from '../helpers/saveToDatabase';
 
 const router = express.Router();
 
@@ -12,14 +12,11 @@ router.post('/album', async (req, res) => {
   try {
 
     const album = await tidown.downloadAlbum(id);
-
-    const data = await format(album);
-
-    await fb.ref(`/artists/${album.artist.id}`).set(data);
+    await saveToDatabase(album);
 
     res.status(200).send({
       message: 'Successfully downloaded album.',
-      album: format(album),
+      album,
     });
 
   } catch (e) {

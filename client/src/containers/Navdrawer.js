@@ -5,22 +5,26 @@ import { push } from 'react-router-redux';
 import UpArrow from '../components/UpArrow';
 import clearAlbums from '../actions/clearAlbums';
 
-const navItems = [{
-  key: 'artist',
-  primaryText: 'Artists',
-  leftIcon: <FontIcon>person</FontIcon>,
-  path: '/artists',
-}, {
-  key: 'album',
-  primaryText: 'Albums',
-  leftIcon: <FontIcon>album</FontIcon>,
-  path: '/albums',
-}, {
-  key: 'releases',
-  primaryText: 'New Releases',
-  leftIcon: <FontIcon>library_music</FontIcon>,
-  path: '/releases',
-}];
+const navItems = [
+  {
+    key: 'artist',
+    primaryText: 'Artists',
+    leftIcon: <FontIcon>person</FontIcon>,
+    path: '/artists',
+  },
+  // {
+  //   key: 'album',
+  //   primaryText: 'Albums',
+  //   leftIcon: <FontIcon>album</FontIcon>,
+  //   path: '/albums',
+  // },
+  // {
+  //   key: 'releases',
+  //   primaryText: 'New Releases',
+  //   leftIcon: <FontIcon>library_music</FontIcon>,
+  //   path: '/releases',
+  // },
+];
 
 class Navdrawer extends Component {
 

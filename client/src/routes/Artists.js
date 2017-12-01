@@ -13,10 +13,6 @@ const Artist = ({ albums }) => (
       </div>
     </div>
 
-    <div>
-      <RecentArtists />
-    </div>
-
   </div>
 );
 

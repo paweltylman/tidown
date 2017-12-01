@@ -40,22 +40,9 @@ const fetchArtistInfo = id => async (dispatch) => {
     // append more info to each album
     allAlbums = await Promise.map(filterAlbums(allAlbums), async (album) => {
 
-      // check if the album exists in the database to see if it has already been downloaded
-      const fbAlbum = await fb.database().ref(`/artists/${id}/albums/${album.id}`).once('value');
+      const tracks = await tidal.getAlbumTracks(album.id);
+      album.tracks = tracks;
 
-      // if the album exists in the database append some extra info
-      if (fbAlbum.val()) {
-
-        album.path = fbAlbum.val().path;
-        album.tracks = fbAlbum.val().tracks;
-
-      } else {
-
-        // if the album doesn't exist fetch it's tracks from Tidal
-        const tracks = await tidal.getAlbumTracks(album.id);
-        album.tracks = tracks;
-
-      }
       // parse the album cover
       album.cover = tidal.albumArtToUrl(album.cover);
       return album;
@@ -85,7 +72,7 @@ const fetchArtistInfo = id => async (dispatch) => {
     dispatch(receiveArtistInfo(data));
 
   } catch (e) {
-
+    console.log(e);
     dispatch(errorArtistInfo());
   }
 };
