@@ -7,12 +7,17 @@ const router = express.Router();
 
 router.post('/album', async (req, res) => {
 
-  const { id } = req.body.album;
+  let { album } = req.body;
+  const { id } = album;
 
   try {
 
-    const album = await tidown.downloadAlbum(id);
+    await fb.ref(`/queue/${id}`).set(album);
+
+    album = await tidown.downloadAlbum(id);
     await saveToDatabase(album);
+
+    await fb.ref(`/queue/${id}`).remove();
 
     res.status(200).send({
       message: 'Successfully downloaded album.',
@@ -21,9 +26,9 @@ router.post('/album', async (req, res) => {
 
   } catch (e) {
 
-    // await fb.ref('/albums/error').child(id).set(id);
+    await fb.ref(`/errors/${id}`).child(id).set(album);
 
-    // await fb.ref('/albums/queue').child(id).remove();
+    await fb.ref(`/queue/${id}`).child(id).remove();
 
     let message;
 

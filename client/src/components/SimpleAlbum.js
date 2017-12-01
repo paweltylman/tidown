@@ -92,7 +92,13 @@ export default class SimpleAlbum extends Component {
 
   render() {
 
-    const { album } = this.props;
+    const { album, isQueued } = this.props;
+    const {
+      downloading,
+      processing,
+      plexError,
+      downloadError,
+    } = this.state;
 
     return (
       <div className="md-cell md-cell--3-desktop">
@@ -107,8 +113,8 @@ export default class SimpleAlbum extends Component {
                   className="md-cell--right"
                   tooltipLabel={
                     album.path ? 'Available On Plex' :
-                      this.state.downloading ? 'Adding To Plex' :
-                        this.state.plexError ? 'Error' :
+                      downloading || isQueued ? 'Adding To Plex' :
+                        plexError ? 'Error' :
                         'Add To Plex'
                   }
                   tooltipPosition="top"
@@ -116,9 +122,9 @@ export default class SimpleAlbum extends Component {
                   iconClassName={
                     album.path ? (
                       'fa fa-check'
-                    ) : this.state.downloading ? (
+                    ) : downloading || isQueued ? (
                       'fa fa-spinner fa-pulse'
-                    ) : this.state.plexError ? (
+                    ) : plexError ? (
                       'fa fa-exclamation-triangle'
                     ) : 'fa fa-cloud-upload'
                   }
@@ -127,16 +133,16 @@ export default class SimpleAlbum extends Component {
                 <Button
                   className="md-cell--right album-button"
                   tooltipLabel={
-                    this.state.processing ? 'Processing' :
-                    this.state.downloadError ? 'Error' :
-                    'Download'
+                    processing ? 'Processing'
+                    : downloadError ? 'Error'
+                    : 'Download'
                   }
                   tooltipPosition="top"
                   icon
                   iconClassName={
-                    this.state.processing ? (
+                    processing ? (
                       'fa fa-spinner fa-pulse'
-                    ) : this.state.downloadError ? (
+                    ) : downloadError ? (
                       'fa fa-exclamation-triangle'
                     ) : 'fa fa-download'
                   }

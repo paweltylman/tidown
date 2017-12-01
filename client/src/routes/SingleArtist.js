@@ -23,7 +23,7 @@ class SingleArtist extends Component {
 
   render() {
 
-    const { artist, availableAlbums } = this.props;
+    const { artist, availableAlbums, queuedAlbums } = this.props;
 
     if (!artist.data.name || artist.loading || !isLoaded(availableAlbums)) {
       return (
@@ -61,6 +61,7 @@ class SingleArtist extends Component {
           showViewToggle
           update={this.update}
           availableAlbums={availableAlbums}
+          queuedAlbums={queuedAlbums}
         />
       </div>
     );
@@ -71,6 +72,7 @@ class SingleArtist extends Component {
 const mapStateToProps = state => ({
   artist: state.artist,
   availableAlbums: state.firebase.data.availableAlbums,
+  queuedAlbums: state.firebase.data.queuedAlbums,
 });
 
 const mapDispatchToProps = {
@@ -82,6 +84,10 @@ export default compose(
     {
       path: `/artists/${props.match.params.id}/albums`,
       storeAs: 'availableAlbums',
+    },
+    {
+      path: '/queue',
+      storeAs: 'queuedAlbums',
     },
   ]),
   connect(mapStateToProps, mapDispatchToProps),

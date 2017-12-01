@@ -25,7 +25,7 @@ export default class Albums extends Component {
 
   render() {
 
-    const { albums, availableAlbums } = this.props;
+    const { albums, availableAlbums, queuedAlbums } = this.props;
 
     return (
       <div className="md-grid" style={{ marginTop: 40 }}>
@@ -63,7 +63,7 @@ export default class Albums extends Component {
                   key={album.id}
                   available={album.available}
                   path={album.path}
-                  update={this.props.update}
+                  isQueued={queuedAlbums && queuedAlbums.hasOwnProperty(album.id)}
                 />
               );
             }
@@ -73,7 +73,7 @@ export default class Albums extends Component {
                   key={album.id}
                   available={album.available}
                   path={album.path}
-                  update={this.props.update}
+                  isQueued={queuedAlbums && queuedAlbums.hasOwnProperty(album.id)}
                 />
               );
 
