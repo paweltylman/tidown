@@ -21,7 +21,7 @@ class SingleAlbum extends Component {
 
     const { albums } = this.props;
 
-    if (!albums.data.length > 0) {
+    if (albums.loading || !albums.data.length > 0) {
       return (
         <Spinner />
       );
