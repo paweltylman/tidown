@@ -28,7 +28,7 @@ router.post('/album', async (req, res) => {
 
     await fb.ref(`/errors/${id}`).child(id).set(album);
 
-    await fb.ref(`/queue/${id}`).child(id).remove();
+    await fb.ref(`/queue/${id}`).remove();
 
     let message;
 
