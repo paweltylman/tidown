@@ -14,6 +14,7 @@ const saveToDatabase = async (album) => {
 
     // manual timestamp
     const now = new Date().getTime();
+    album.downloaded = now;
 
     // assign artist value (this is a mess... should be refactored)
     if (fbArtist.val()) {
@@ -22,10 +23,7 @@ const saveToDatabase = async (album) => {
         lastDownload: now,
         albums: {
           ...fbArtist.val().albums,
-          [album.id]: {
-            ...album,
-            downloaded: now,
-          },
+          [album.id]: album,
         },
       };
     } else {
@@ -33,10 +31,7 @@ const saveToDatabase = async (album) => {
         ...album.artist,
         lastDownload: now,
         albums: {
-          [album.id]: {
-            ...album,
-            downloaded: now,
-          },
+          [album.id]: album,
         },
       };
     }
