@@ -52,7 +52,18 @@ const fetchNewAlbums = () => async (dispatch) => {
 
       albums[property].forEach(async (album) => {
 
-        album.cover = tidal.albumArtToUrl(album.cover);
+        // parse the album cover
+        if (album.cover) {
+          album.cover = tidal.albumArtToUrl(album.cover);
+        } else {
+          album.cover = {
+            xs: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+            sm: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+            md: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+            lg: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+          };
+        }
+
         album.artist = album.artists[0];
 
         const tracks = await tidal.getAlbumTracks(album.id);

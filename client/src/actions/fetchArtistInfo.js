@@ -43,7 +43,17 @@ const fetchArtistInfo = id => async (dispatch) => {
       album.tracks = tracks;
 
       // parse the album cover
-      album.cover = tidal.albumArtToUrl(album.cover);
+      if (album.cover) {
+        album.cover = tidal.albumArtToUrl(album.cover);
+      } else {
+        album.cover = {
+          xs: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+          sm: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+          md: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+          lg: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+        };
+      }
+
       return album;
     });
 
@@ -71,7 +81,8 @@ const fetchArtistInfo = id => async (dispatch) => {
     dispatch(receiveArtistInfo(data));
 
   } catch (e) {
-    dispatch(errorArtistInfo());
+
+    dispatch(errorArtistInfo(e));
   }
 };
 

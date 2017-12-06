@@ -27,7 +27,17 @@ const fetchAlbum = id => async (dispatch) => {
     const tracks = await tidal.getAlbumTracks(id);
     album.tracks = tracks;
 
-    album.cover = tidal.albumArtToUrl(album.cover);
+    // parse the album cover
+    if (album.cover) {
+      album.cover = tidal.albumArtToUrl(album.cover);
+    } else {
+      album.cover = {
+        xs: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+        sm: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+        md: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+        lg: 'https://listen.tidal.com/defaultAlbumAndTrackImage.38e22b.svg',
+      };
+    }
 
     dispatch(receiveAlbum(album));
 
