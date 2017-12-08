@@ -322,6 +322,7 @@ class Tidown extends Tidal {
       const tracks = await this.getAlbumTracks(id);
 
       const artist = await this.getArtist(album.artist.id);
+
       if (artist.picture) {
         artist.picture = this.artistPicToUrl(artist.picture);
       } else {

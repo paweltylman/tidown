@@ -3,8 +3,8 @@ import { fb } from '../app';
 
 const scanner = () => {
   fb.ref('/queue').on('child_removed', async (snapshot) => {
-    const albums = await fb.ref('/queue/albums').once('value');
-    if (!albums.val()) {
+    const queue = await fb.ref('/queue/').once('value');
+    if (!queue.val()) {
       if (process.env.POST_PROCESS) {
         execSync(process.env.POST_PROCESS);
       }
