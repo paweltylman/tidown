@@ -30,7 +30,7 @@ class SingleAlbum extends Component {
 
     const { albums, availableAlbums, queuedAlbums } = this.props;
 
-    if (albums.loading || !albums.data.length > 0) {
+    if (albums.loading || !albums.data.length > 0 || !isLoaded(albums) || !isLoaded(queuedAlbums)) {
       return (
         <Spinner />
       );

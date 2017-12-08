@@ -25,7 +25,7 @@ class SingleArtist extends Component {
 
     const { artist, availableAlbums, queuedAlbums } = this.props;
 
-    if (!artist.data.name || artist.loading || !isLoaded(availableAlbums)) {
+    if (!artist.data.name || artist.loading || !isLoaded(availableAlbums) || !isLoaded(queuedAlbums)) {
       return (
         <Spinner />
       );
@@ -53,7 +53,10 @@ class SingleArtist extends Component {
 
         <Divider />
 
+        <h1 className="title blk album-align" > Top Tracks </h1>
         <TrackList tracks={artist.data.topTracks} />
+
+        <Divider />
 
         <Albums
           albums={artist.data.albums}

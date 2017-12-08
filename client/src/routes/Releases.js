@@ -37,7 +37,11 @@ class Releases extends Component {
 
     const { albums, availableAlbums, queuedAlbums } = this.props;
 
-    if (!albums.data.newAlbums.length > 0 || !isLoaded(availableAlbums)) {
+    if (
+      !albums.data.newAlbums.length > 0
+      || !isLoaded(availableAlbums)
+      || !isLoaded(queuedAlbums)
+    ) {
       return (
         <Spinner />
       );
