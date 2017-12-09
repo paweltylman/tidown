@@ -4,6 +4,7 @@ import {
   Media,
   Divider,
 } from 'react-md';
+import { Link } from 'react-router-dom';
 import PlexButton from './PlexButton';
 import DownloadButton from './DownloadButton';
 import TrackList from './TrackList';
@@ -21,7 +22,11 @@ export default ({ album, isQueued }) => (
         />
       </Media>
 
-      <p className="album-header md-display-1 md-text-center">{album.artist.name}</p>
+      <p className="album-header md-display-1 md-text-center artist">
+        <Link to={`/artist/${album.artist.id}`}>
+          {album.artist.name}
+        </Link>
+      </p>
 
       <Divider style={{ marginBottom: 20, marginTop: 20 }} />
 

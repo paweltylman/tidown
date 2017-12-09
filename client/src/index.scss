@@ -17,6 +17,23 @@ $md-secondary-color: $md-deep-orange-a-200;
   padding: 0px;
 }
 
+.artist {
+  margin-top: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.artist a {
+  text-decoration: none;
+  color: black;
+}
+
+.simple-artist {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+
 .md-display-1 {
   color: black;
   font-size: 20px;

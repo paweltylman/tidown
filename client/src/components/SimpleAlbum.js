@@ -100,6 +100,12 @@ export default class SimpleAlbum extends Component {
       downloadError,
     } = this.state;
 
+    const artist = (
+      <Link to={`/artist/${album.artists[0].id}`} className="simple-artist">
+        {album.artists[0].name}
+      </Link>
+    );
+
     return (
       <div className="md-cell md-cell--3-desktop">
         <Card>
@@ -108,7 +114,7 @@ export default class SimpleAlbum extends Component {
               <img src={album.cover.lg} alt="Album Art" />
             </Link>
             <MediaOverlay>
-              <CardTitle title={album.artists[0].name} subtitle={album.title}>
+              <CardTitle title={artist} subtitle={album.title}>
                 <Button
                   className="md-cell--right"
                   tooltipLabel={
