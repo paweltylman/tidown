@@ -45,6 +45,7 @@ app.use(cors());
 app.use(zip());
 
 app.use('/plex', queue({ activeLimit: 5, queuedLimit: -1 }));
+app.use('/plex', plex);
 app.use('/download', download);
 
 app.use(express.static(path.join(__dirname, './client/build')));
