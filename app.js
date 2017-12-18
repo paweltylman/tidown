@@ -44,7 +44,7 @@ app.use(cors());
 // easy zip
 app.use(zip());
 
-app.use('/plex', queue({ activeLimit: 5, queuedLimit: -1 }));
+app.use('/plex', queue({ activeLimit: 1, queuedLimit: -1 }));
 app.use('/plex', plex);
 app.use('/download', download);
 
