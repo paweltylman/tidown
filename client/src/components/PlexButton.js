@@ -6,6 +6,7 @@ export default class PlexButton extends Component {
 
   state = {
     downloading: false,
+    available: false,
     error: false,
   }
 
@@ -23,6 +24,11 @@ export default class PlexButton extends Component {
         },
       });
 
+      this.setState({
+        downloading: false,
+        available: true,
+      });
+
     } catch (e) {
 
       this.setState({
@@ -37,9 +43,9 @@ export default class PlexButton extends Component {
   render() {
 
     const { album, isQueued } = this.props;
-    const { downloading, error } = this.state;
+    const { downloading, available, error } = this.state;
 
-    if (album.path) {
+    if (album.path || available) {
       return (<Button disabled text="Available On Plex" />);
     } else if (downloading || isQueued) {
       return (<Button disabled text="Adding To Plex" />);

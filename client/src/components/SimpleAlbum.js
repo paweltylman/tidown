@@ -14,6 +14,7 @@ export default class SimpleAlbum extends Component {
   state = {
     downloading: false,
     processing: false,
+    available: false,
     plexError: false,
     downloadError: false,
   }
@@ -33,6 +34,11 @@ export default class SimpleAlbum extends Component {
           data: {
             album: this.props.album,
           },
+        });
+
+        this.setState({
+          available: true,
+          downloading: false,
         });
 
       } catch (e) {
@@ -96,6 +102,7 @@ export default class SimpleAlbum extends Component {
     const {
       downloading,
       processing,
+      available,
       plexError,
       downloadError,
     } = this.state;
@@ -118,7 +125,7 @@ export default class SimpleAlbum extends Component {
                 <Button
                   className="md-cell--right"
                   tooltipLabel={
-                    album.path ? 'Available On Plex' :
+                    (album.path || available) ? 'Available On Plex' :
                       downloading || isQueued ? 'Adding To Plex' :
                         plexError ? 'Error' :
                         'Add To Plex'
