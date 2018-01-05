@@ -1,5 +1,6 @@
 import express from 'express';
 import Promise from 'bluebird';
+import { exec } from 'child_process';
 import { tidown, fb } from '../app';
 import saveToDatabase from '../helpers/saveToDatabase';
 
@@ -12,12 +13,14 @@ router.post('/album', async (req, res) => {
 
   try {
 
-    await fb.ref(`/queue/${id}`).set(album);
+    // await fb.ref(`/queue/${id}`).set(album);
 
     album = await tidown.downloadAlbum(id);
     await saveToDatabase(album);
 
-    await fb.ref(`/queue/${id}`).remove();
+    // await fb.ref(`/queue/${id}`).remove();
+
+    exec(process.env.POST_PROCESS);
 
     res.status(200).send({
       message: 'Successfully downloaded album.',
@@ -28,7 +31,7 @@ router.post('/album', async (req, res) => {
 
     await fb.ref(`/errors/${id}`).child(id).set(album);
 
-    await fb.ref(`/queue/${id}`).remove();
+    // await fb.ref(`/queue/${id}`).remove();
 
     let message;
 
