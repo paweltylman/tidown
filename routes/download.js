@@ -14,6 +14,13 @@ router.post('/album', async (req, res) => {
 
   const { id } = req.body;
 
+  if (!id) {
+    return res.status(400).send({
+      ok: false,
+      message: 'id is required',
+    });
+  }
+
   const album = await tidown.downloadAlbum(id);
 
   const { path, title } = album;
@@ -21,7 +28,7 @@ router.post('/album', async (req, res) => {
 
   try {
 
-    res.zip({
+    return res.zip({
       files: [
         {
           path,
@@ -33,7 +40,7 @@ router.post('/album', async (req, res) => {
 
   } catch (e) {
 
-    res.status(400).send({
+    return res.status(400).send({
       message: 'An error occurred.',
     });
 
@@ -44,13 +51,20 @@ router.post('/track', async (req, res) => {
 
   const { id } = req.body;
 
+  if (!id) {
+    return res.status(400).send({
+      ok: false,
+      message: 'id is required',
+    });
+  }
+
   const track = await tidown.downloadTrack(id);
 
   const { path } = track;
 
   try {
 
-    res.download(path, (err) => {
+    return res.download(path, (err) => {
       if (err) {
         throw err;
       }
@@ -59,7 +73,7 @@ router.post('/track', async (req, res) => {
 
   } catch (e) {
 
-    res.status(400).send({
+    return res.status(400).send({
       message: 'An error occurred.',
     });
 
