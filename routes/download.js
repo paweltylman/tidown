@@ -1,12 +1,17 @@
 import express from 'express';
 import fs from 'fs-extra';
-import { tidown, fb } from '../app';
+import { tidown } from '../app';
 
 const router = express.Router();
 
-router.get('/album', async (req, res) => {
+router.post('/album', async (req, res) => {
 
-  const { path, artist, album } = req.query;
+  const { id } = req.body;
+
+  const album = await tidown.downloadAlbum(id);
+
+  const { path, title } = album;
+  const artist = album.artist.name;
 
   try {
 
@@ -29,49 +34,13 @@ router.get('/album', async (req, res) => {
   }
 });
 
-router.post('/album', async (req, res) => {
-
-  const { id } = req.body;
-
-  try {
-
-    const album = await tidown.downloadAlbum(id, false);
-
-    res.status(200).send({
-      album,
-    });
-
-  } catch (e) {
-
-    res.status(400).send({
-      message: 'An error occurred.',
-    });
-
-  }
-});
-
 router.post('/track', async (req, res) => {
 
   const { id } = req.body;
 
-  try {
+  const track = await tidown.downloadTrack(id);
 
-    const track = await tidown.downloadTrack(id, false);
-
-    res.status(200).send(track);
-
-  } catch (e) {
-
-    res.status(400).send({
-      message: 'An error occurred.',
-    });
-
-  }
-});
-
-router.get('/track', async (req, res) => {
-
-  const { path } = req.query;
+  const { path } = track;
 
   try {
 

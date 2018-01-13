@@ -5,26 +5,18 @@ import queue from 'express-queue';
 import logger from 'morgan';
 import path from 'path';
 import dotenv from 'dotenv';
-import firebase from 'firebase';
 import cors from 'cors';
 import zip from 'express-easy-zip';
-import fbConfig from './fbConfig';
 import Tidown from './helpers/tidown';
-// import scanner from './helpers/scanner';
 
-import plex from './routes/plex';
 import download from './routes/download';
 
 // start dotenv
 dotenv.config();
 
-// firebase init
-firebase.initializeApp(fbConfig);
-export const fb = firebase.database();
-
 export const tidown = new Tidown({
-  sessionId: process.env.SESSIONID,
-  downloadPath: process.env.DOWNLOAD_PATH,
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
 });
 
 const app = express();
@@ -44,8 +36,7 @@ app.use(cors());
 // easy zip
 app.use(zip());
 
-app.use('/plex', queue({ activeLimit: 1, queuedLimit: -1 }));
-app.use('/plex', plex);
+app.use('/download', queue({ activeLimit: 2, queuedLimit: -1 }));
 app.use('/download', download);
 
 app.use(express.static(path.join(__dirname, './client/build')));

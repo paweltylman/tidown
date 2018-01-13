@@ -26,8 +26,14 @@ class Tidown extends Tidal {
     super();
     this.downloadPath = options.downloadPath || path.join(__dirname, '../downloads');
     this.userId = options.userId;
-    this.sessionId = options.sessionId;
+    this.username = options.username;
+    this.password = options.password;
     this.quality = options.quality || 'HIGH';
+
+    // make sure username and password are valid
+    if (!this.username || !this.password) {
+      throw new Error('username and password are required arguments');
+    }
 
     // ensure the quality passed is valid
     const accQualities = ['LOW', 'HIGH', 'LOSSLESS'];
@@ -47,19 +53,14 @@ class Tidown extends Tidal {
   * @param {string} username - Tidal username or email
   * @param {string} password - Tidal password
   */
-  async login(username, password) {
-
-    // make sure username and password are valid
-    if (!username || !password) {
-      throw new Error('username and password are required arguments');
-    }
+  async login() {
 
     try {
 
       // using the ios token as to only get back .m4a and .mp3 files
       const params = qs.stringify({
-        username,
-        password,
+        username: this.username,
+        password: this.password,
         clientVersion: '2.1.2',
       });
 
@@ -140,39 +141,6 @@ class Tidown extends Tidal {
     } catch (e) {
       throw e;
     }
-  }
-
-  /**
-  * create the neccessary directories if they don't exist
-  * @param {string} artist - artist name
-  * @param {string} album - album name
-  */
-  mkdirs(artist, album) {
-
-    const artistPath = `${this.downloadPath}/${sanitize(artist)}`;
-    const albumPath = `${artistPath}/${sanitize(album)}`;
-
-    try {
-
-      if (!fs.existsSync(this.downloadPath)) {
-        fs.mkdirSync(this.downloadPath);
-      }
-
-      if (!fs.existsSync(artistPath)) {
-        fs.mkdirSync(artistPath);
-      }
-
-      if (!fs.existsSync(albumPath)) {
-        fs.mkdirSync(albumPath);
-      }
-
-      return albumPath;
-
-
-    } catch (e) {
-      throw e;
-    }
-
   }
 
   /**
@@ -271,9 +239,13 @@ class Tidown extends Tidal {
   * @param {number} id - the Tidal track id
   * @param {boolean} temp - whether or not to keep the track
   */
-  async downloadTrack(id, keep = true) {
+  async downloadTrack(id) {
 
     try {
+
+      if (!this.sessionId) {
+        await this.login();
+      }
 
       const track = await this.getTrack(id);
 
@@ -284,13 +256,7 @@ class Tidown extends Tidal {
       track.album = album;
       track.codec = codec;
 
-      let albumPath;
-
-      if (!keep) {
-        albumPath = tempy.directory();
-      } else {
-        albumPath = await this.mkdirs(album.artist.name, album.title);
-      }
+      const albumPath = tempy.directory();
 
       const image = await this.downloadArtwork(album, albumPath);
 
@@ -317,30 +283,18 @@ class Tidown extends Tidal {
   async downloadAlbum(id, keep = true) {
 
     try {
+
+      if (!this.sessionId) {
+        await this.login();
+      }
+
       // most of these methods are inherited from tidal-api-wrapper
       const album = await this.getAlbum(id);
       const tracks = await this.getAlbumTracks(id);
 
       const artist = await this.getArtist(album.artist.id);
 
-      if (artist.picture) {
-        artist.picture = this.artistPicToUrl(artist.picture);
-      } else {
-        // if the artist does not have a picture use Tidal's stock artist picture
-        artist.picture = {
-          sm: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
-          md: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
-          lg: 'https://listen.tidal.com/defaultArtistImage.983243.svg',
-        };
-      }
-
-      let albumPath;
-
-      if (!keep) {
-        albumPath = tempy.directory();
-      } else {
-        albumPath = this.mkdirs(album.artist.name, album.title);
-      }
+      const albumPath = tempy.directory();
 
       const image = await this.downloadArtwork(album, albumPath);
 
