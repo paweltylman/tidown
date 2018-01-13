@@ -39,12 +39,6 @@ app.use(zip());
 app.use('/download', queue({ activeLimit: 2, queuedLimit: -1 }));
 app.use('/download', download);
 
-app.use(express.static(path.join(__dirname, './client/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

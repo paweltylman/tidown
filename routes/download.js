@@ -4,6 +4,12 @@ import { tidown } from '../app';
 
 const router = express.Router();
 
+router.get('/health-check', (req, res) => {
+  res.json({
+    ok: true,
+  });
+});
+
 router.post('/album', async (req, res) => {
 
   const { id } = req.body;
