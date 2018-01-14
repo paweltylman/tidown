@@ -1,7 +1,6 @@
 import bodyParser from 'body-parser';
 import Debug from 'debug';
 import express from 'express';
-import queue from 'express-queue';
 import logger from 'morgan';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -36,7 +35,6 @@ app.use(cors());
 // easy zip
 app.use(zip());
 
-app.use('/download', queue({ activeLimit: 2, queuedLimit: -1 }));
 app.use('/download', download);
 
 // catch 404 and forward to error handler

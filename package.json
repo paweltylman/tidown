@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "cd client && npm run build && cd ../ && node ./bin/start",
+    "start": "node ./bin/start",
     "dev": "nodemon ./bin/start",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
   },
@@ -21,7 +21,6 @@
     "express": "^4.15.4",
     "express-async-router": "^0.1.12",
     "express-easy-zip": "^1.1.4",
-    "express-queue": "^0.0.8",
     "fs-extra": "^4.0.2",
     "morgan": "^1.8.2",
     "sanitize-filename": "^1.6.1",
