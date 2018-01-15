@@ -32,10 +32,10 @@ router.post('/album', async (req, res) => {
       files: [
         {
           path,
-          name: `${artist} - ${album}`,
+          name: `${artist} - ${title}`,
         },
       ],
-      filename: `${artist} - ${album}.zip`,
+      filename: `${artist} - ${title}.zip`,
     });
 
   } catch (e) {
